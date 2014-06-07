@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html ng-app="lamusica" ng-controller="controller">
-  <head>
+<head>
     <meta charset="utf-8">
     <title ng-bind="title">lamusica!</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -8,8 +8,8 @@
     <link href="css/app.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
     <script src="js/jquery.js"></script>
     <script src="js/typeahead.min.js"></script>
@@ -18,68 +18,91 @@
     <script src="js/angular-resource.min.js"></script>
     <script src="js/app.js"></script>
     <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-      ga('create', 'UA-51540616-1', 'manchan.github.io');
-      ga('send', 'pageview');
-    </script>  
-  </head>
-  <body>
-    <div class="container">
-      <div id="header" class="clearfix">
-        <h1><a href="http://manchan.github.io/lamusica/">lamusica!</a></h1>
-      </div>
-      <!-- /header -->
-      <div class="row">
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-51540616-1', 'manchan.github.io');
+        ga('send', 'pageview');
+    </script>
+</head>
+<body>
+<div class="container">
+    <div id="header" class="clearfix">
+        <h1><a href="http://manchan.github.io/lamusica/">{{title}}!</a></h1>
+    </div>
+    <!-- /header -->
+    <div class="row">
         <div id="form" class="col-md-4">
-          <form role="form" ng-submit="submit(true)">
-            <div class="form-group">
-              <input type="text" class="form-control typeahead"
-                     placeholder="Artist name"
-                     ng-model="artist" />
-              <button type="submit" class="btn btn-default"><b>Play!</b></button>
-            </div>
-          </form>
+            <form role="form" ng-submit="submit(true)">
+                <div class="form-group">
+                    <input type="text" class="form-control typeahead"
+                           placeholder="Artist name"
+                           ng-model="artist" />
+                    <button type="submit" class="btn btn-default"><b>Play!</b></button>
+                </div>
+            </form>
         </div>
-      </div>
-      <div id="social-buttons">
-      </div>
-          <div id="set-number">
-           <input type="text" class="form-control right"
-                     placeholder="Set Number"
-                     ng-model="number" style="text-align: right" id="number"/>
-          </div>
-          <br>
-      <hr />
+    </div>
+    <div id="social-buttons">
+    </div>
+    <div id="set-number">
+        <input type="text" class="form-control right"
+               placeholder="Set Number"
+               ng-model="number" style="text-align: right" id="number"/>
+    </div>
+    <!--<br/>-->
+    <!--<p><a href="detail.html#?q={{artist}}">{{artist}}</a>-->
+    <!--</p>-->
+    <br/>
+    <hr />
 
-      <div class="row">
-                <div id="list">
-          <div id="list-intro">
-            <p><b>lamusica!</b> is YouTube music player</p>
-            <p>Having fun!</p>
-
-          </div>
-          <div class="list-item" ng-repeat="track in tracks">
-            <a class="clearfix" ng-click="click($index)" ng-class="active_class($index)">
-              <img ng-src="{{ track.image[0]['#text'] }}" class="pull-left">
-              <b class="pull-left">{{ track.name }}</b>
-            </a>
-          </div>
+    <div class="row">
+        <div id="list">
+            <div id="list-intro">
+                <p><b>lamusica!</b> is YouTube music player</p>
+                <p>Having fun!</p>
+            </div>
+            <div class="list-item" ng-repeat="track in tracks">
+                <a class="clearfix" ng-click="click($index)" ng-class="active_class($index)">
+                    <img ng-src="{{ track.image[1]['#text'] }}" class="pull-left">
+                    <b class="pull-left">{{ track.name }}</b>
+                </a>
+            </div>
         </div>
 
         <div id="content">
-          <div id="player"></div>
+            <div id="player"></div>
         </div>
-      </div>      
-      <hr />
-      <div id="footer">
-        <address>
-          <!-- &copy; <a href="http://manchan.github.io/">manchan</a>, -->
-          <b>lamusica</b> using Last.fm Web API, YouTube API, jQuery, AngularJS, Twitter Bootstrap and GitHub!
-        </address>
-      </div>
     </div>
-  </body>
+
+    <br/>
+    <div class="row">
+        <div class="col-md-4">
+            <h3>Biography</h3>
+            <p id="artist_info"></p>
+        </div>
+
+        <div class="col-md-4">
+            <h3>Similar</h3>
+            <div ng-repeat="artist in similar_artists">
+            <a class="clearfix" ng-click="similar(artist.name)" ng-class="active_class($index)">
+                <img ng-src="{{ artist.image[1]['#text'] }}" class="pull-left">
+                <b class="pull-left">{{ artist.name }}</b>
+            </a>
+            </div>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+
+    <hr />
+
+    <div id="footer">
+        <address>
+            &copy; <a href="http://manchan.github.io/">manchan</a>,
+            <b>lamusica</b> using Last.fm Web API, YouTube API, jQuery, AngularJS, Twitter Bootstrap and GitHub!
+        </address>
+    </div>
+</div>
+</body>
 </html>
