@@ -140,7 +140,7 @@ app.service('PlayList', function(){
 
 app.controller('controller', function($scope, $location, Tracks, YouTube, PlayList, ArtistInfo) {
     $scope.playing = false;
-    $scope.title = 'lamusica!';
+    $scope.title = 'lamusica';
     $scope.number = '';
 
     //XXX
@@ -171,7 +171,7 @@ app.controller('controller', function($scope, $location, Tracks, YouTube, PlayLi
         YouTube.play(PlayList.next(index), $scope.play);
         var track = PlayList.current_track();
         if(track) {
-            $scope.title = track.name + ' by ' + track.artist.name + ' - lamusica!';
+            $scope.title = track.name + ' by ' + track.artist.name + ' - lamusica';
             $scope.playing = true;
         }
     };
@@ -184,7 +184,7 @@ app.controller('controller', function($scope, $location, Tracks, YouTube, PlayLi
         PlayList.clear();
         $location.search('q', $scope.artist);
 
-        $scope.title = $scope.artist + ' - lamusica!';
+        $scope.title = $scope.artist + ' - lamusica';
 
         Tracks.get($scope.artist, function(tracks){
             angular.element('#list-intro').remove();
