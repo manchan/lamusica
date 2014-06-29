@@ -55,6 +55,30 @@ app.factory('ArtistInfo', function($http) {
     };
 });
 
+app.factory('ArtistAlbums', function($http) {
+
+    return {
+        get : function(query, callback) {
+            $http.jsonp('http://ws.audioscrobbler.com/2.0/', {
+                params : {
+                    api_key : '6a6281367c3ad09f1b4a7c15dc50675b',
+                    method : 'artist.gettopalbums',
+                    format : 'json',
+                    callback : 'JSON_CALLBACK',
+                    artist : query,
+                    limit : 10
+
+                }
+            }).success(function(data){
+
+//                console.log(data.topalbums.album);
+                return [];
+            });
+        }
+    };
+});
+
+
 
 
 app.service('YouTube', function($window, $http){
@@ -138,12 +162,11 @@ app.service('PlayList', function(){
     };
 });
 
-app.controller('controller', function($scope, $location, Tracks, YouTube, PlayList, ArtistInfo) {
+app.controller('controller', function($scope, $location, Tracks, YouTube, PlayList, ArtistInfo, ArtistAlbums) {
     $scope.playing = false;
     $scope.title = 'lamusica';
     $scope.number = '';
 
-    //XXX
     $('#form .typeahead').typeahead({
         name : 'artist',
         remote : {
@@ -166,18 +189,22 @@ app.controller('controller', function($scope, $location, Tracks, YouTube, PlayLi
         $scope.artist = datum.value;
         $scope.submit(true);
     });
-    ///XXX
+
     $scope.play = function(index){
         YouTube.play(PlayList.next(index), $scope.play);
         var track = PlayList.current_track();
         if(track) {
             $scope.title = track.name + ' by ' + track.artist.name + ' - lamusica';
+            $("#tweetButtonWrapper").html(
+                '<a href="https://twitter.com/share" data-url="http://manchan.github.io/lamusica/" class="twitter-share-button"  data-text="'+ $scope.title + '" data-lang="en">Tweet</a>'
+            );
+            twttr.widgets.load();
             $scope.playing = true;
         }
     };
     $scope.submit = function(autoplay, query){
 
-        $scope.artist = query || angular.element('.tt-query').val(); //XXX
+        $scope.artist = query || angular.element('.tt-query').val();
 
         if (!$scope.artist || typeof $scope.artist == 'undefined') return;
         if (!$scope.playing) angular.element('#form .typeahead').typeahead('setQuery', $scope.artist);
@@ -206,6 +233,19 @@ app.controller('controller', function($scope, $location, Tracks, YouTube, PlayLi
                 this.push(row);
             }, $scope.similar_artists);
         });
+
+        ArtistAlbums.get($scope.artist, function(artist_albums){
+
+            // TODO apply to Angular
+            // $('#artist_info').html(artist_info.bio.content);
+            // $scope.similar_artists = [];
+            // angular.forEach(artist_info.similar.artist, function(row, i){
+            //     this.push(row);
+            // }, $scope.similar_artists);
+        });
+
+
+
     };
     $scope.click = function(index){
         $scope.play(index);
