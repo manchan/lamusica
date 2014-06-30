@@ -196,7 +196,7 @@ app.controller('controller', function($scope, $location, Tracks, YouTube, PlayLi
         if(track) {
             $scope.title = track.name + ' by ' + track.artist.name + ' - lamusica';
             $("#tweetButtonWrapper").html(
-                '<a href="https://twitter.com/share" data-url="http://manchan.github.io/lamusica/" class="twitter-share-button"  data-text="'+ $scope.title + '" data-lang="en">Tweet</a>'
+                '<a href="https://twitter.com/share" data-url="' + location.href + '" class="twitter-share-button"  data-text="'+ $scope.title + '" data-lang="en">Tweet</a>'
             );
             twttr.widgets.load();
             $scope.playing = true;
@@ -204,7 +204,7 @@ app.controller('controller', function($scope, $location, Tracks, YouTube, PlayLi
     };
     $scope.submit = function(autoplay, query){
 
-        $scope.artist = query || angular.element('.tt-query').val();
+        $scope.artist = query || angular.element('.tt-query').val() || $location.search().q;
 
         if (!$scope.artist || typeof $scope.artist == 'undefined') return;
         if (!$scope.playing) angular.element('#form .typeahead').typeahead('setQuery', $scope.artist);
@@ -243,9 +243,6 @@ app.controller('controller', function($scope, $location, Tracks, YouTube, PlayLi
             //     this.push(row);
             // }, $scope.similar_artists);
         });
-
-
-
     };
     $scope.click = function(index){
         $scope.play(index);
@@ -261,7 +258,7 @@ app.controller('controller', function($scope, $location, Tracks, YouTube, PlayLi
     };
     if($location.search().q) {
         $scope.artist = $location.search().q;
-        $scope.submit(false);
+        $scope.submit(true);
     }else{
         angular.element('#list-intro').fadeIn();
     }
