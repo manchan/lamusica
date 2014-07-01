@@ -28,13 +28,13 @@ a:hover{
   text-align:center;
 }
 #form {
-  width:330px;
+  width:450px;
   margin:0 auto;
   float:none;
 }
 #form .form-control {
   display:inline;
-  width:200px;
+  width:330px;
   padding-left:10px;
 }
 #form .tt-hint {

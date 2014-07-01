@@ -6,6 +6,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/typeahead.js-bootstrap.css" rel="stylesheet">
     <link href="css/app.css" rel="stylesheet">
+    <link href="css/layout.css" rel="stylesheet" type="text/css" />
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -28,18 +29,25 @@
 </head>
 <body>
 <div class="container">
+
     <div id="header" class="clearfix">
-        <h1><a href="http://manchan.github.io/lamusica/" id="top_title">{{title}}</a></h1>
+            <h1>
+                <a href="http://manchan.github.io/lamusica/" id="top_title"><img src="images/lamusica.jpg" alt="LAMUSICA" /></a>
+                <!--{{title}}-->
+            </h1>
+            <p class="jap">LAMUSICA（ラムジカ）は、検索した音楽アーティストの曲をランキング順に、流します。<br />あなたのミュージックライフを楽しませるツールです。是非、使ってみて楽しみましょう。</p>
+            <p class="center">lamusica is YouTube music player. Having fun!</p>
     </div>
+
     <!-- /header -->
     <div class="row">
-        <div id="form" class="col-md-4">
+        <div id="form" class="col-md-5">
             <form role="form" ng-submit="submit(true)">
                 <div class="form-group">
                     <input type="text" class="form-control typeahead"
                            placeholder="Artist name"
                            ng-model="artist" />
-                    <button type="submit" class="btn btn-default"><b>Play!</b></button>
+                    <button type="submit" class="btn btn-default"><b>Play</b></button>
                 </div>
             </form>
         </div>
@@ -69,8 +77,8 @@
     <div class="row">
         <div id="list">
             <div id="list-intro">
-                <p><b>lamusica</b> is YouTube music player</p>
-                <p>Having fun!</p>
+                <!--<p><b>lamusica</b> is YouTube music player</p>-->
+                <!--<p>Having fun!</p>-->
             </div>
             <div class="list-item" ng-repeat="track in tracks">
                 <a class="clearfix" ng-click="click($index)" ng-class="active_class($index)">
@@ -95,10 +103,10 @@
         <div class="col-md-4">
             <h3>Similar</h3>
             <div ng-repeat="artist in similar_artists">
-            <a class="clearfix" ng-click="similar(artist.name)" ng-class="active_class($index)">
-                <img ng-src="{{ artist.image[1]['#text'] }}" class="pull-left">
-                <b class="pull-left">{{ artist.name }}</b>
-            </a>
+                <a class="clearfix" ng-click="similar(artist.name)" ng-class="active_class($index)">
+                    <img ng-src="{{ artist.image[1]['#text'] }}" class="pull-left">
+                    <b class="pull-left">{{ artist.name }}</b>
+                </a>
             </div>
         </div>
         <div class="col-md-4"></div>

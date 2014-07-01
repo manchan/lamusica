@@ -1,0 +1,106 @@
+@charset "utf-8";
+/* CSS Document */
+
+/****************************************
+
+          Setting
+
+*****************************************/
+
+*{
+	margin: 0;
+	padding: 0;
+	/*font-size: 100%;*/
+	vertical-align: baseline;
+}
+
+body{
+	background-color: #000000;
+	font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif; 
+}
+
+img {
+	border: 0;
+}
+
+ol, ul {
+	list-style: none;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/****************************************
+
+          wrapper
+
+*****************************************/
+
+#wrapper{
+	width: 1000px;
+	margin: 0 auto;
+	color:#EB6100;
+}
+
+
+/****************************************
+
+          header
+
+*****************************************/
+
+#header{
+	margin-top: 40px;
+	font-size:12px;
+}
+
+	#header h1{
+		text-align:center;
+		margin-bottom:50px;
+	}
+
+	#header .jap{
+		font-size:14px;
+		padding-bottom:10px;
+        color:#EB6100;
+	}
+
+	#header .center{
+		text-align:center;
+        color:#EB6100;
+	}
+	
+/****************************************
+
+          main
+
+*****************************************/
+
+#main{
+	margin-top:50px;
+}
+
+	#main table{
+		margin: 0 auto;
+	}
+	
+		#main table .left_td{
+			padding-right:30px;
+		}
+
+/****************************************
+
+          footer
+
+*****************************************/
+
+#footer{
+	font-size:10px;
+	margin-top:80px;
+}
+
+	#footer p{
+		text-align:center;
+	}
