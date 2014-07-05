@@ -14,11 +14,11 @@ h1 {
   font-weight:bold;
 }
 a {
-  color: #40E76B;
+  color: #EB6100;
   cursor: pointer;
 }
 a:hover{
-  color: #18BE2C;
+  color: #EB8D00;
 }
 .container {
   margin-bottom:80px;
@@ -30,6 +30,7 @@ a:hover{
 #form {
   width:450px;
   margin:0 auto;
+  margin-top: 10px;
   float:none;
 }
 #form .form-control {
@@ -55,6 +56,10 @@ a:hover{
   padding-left:20px;
   text-align: right;
 }
+.after_view {
+    display: none;
+}
+
 
 #content {
   width:620px;
@@ -71,7 +76,7 @@ a:hover{
   width:320px;
   float:left;
   padding-right:20px;
-  border-right: 1px solid #ccc;
+  /*border-right: 1px solid #ccc;*/
 }
 .list-item {
   width:300px;
@@ -98,7 +103,7 @@ a:hover{
 .list-item a {
   display:block;
   padding:5px;
-  border:1px solid #ccc;
+  /*border:1px solid #ccc;*/
   border-radius: 5px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -122,5 +127,3 @@ address {
 .tt-suggestion p{
   color: gray;
 }
-
-

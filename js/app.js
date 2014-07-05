@@ -243,6 +243,9 @@ app.controller('controller', function($scope, $location, Tracks, YouTube, PlayLi
             //     this.push(row);
             // }, $scope.similar_artists);
         });
+
+        // はじめ非表示を表示状態に
+        $('.after_view').css("display", "block");
     };
     $scope.click = function(index){
         $scope.play(index);

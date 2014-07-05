@@ -30,15 +30,11 @@
 <body>
 <div class="container">
 
-    <div id="header" class="clearfix">
-            <h1>
-                <a href="http://manchan.github.io/lamusica/" id="top_title"><img src="images/lamusica.jpg" alt="LAMUSICA" /></a>
-                <!--{{title}}-->
-            </h1>
+    <div id="header" class="center">
+            <h1><a href="http://manchan.github.io/lamusica/" id="top_title"><img src="images/lamusica.jpg" alt="LAMUSICA" /></a></h1>
             <p class="jap">LAMUSICA（ラムジカ）は、検索した音楽アーティストの曲をランキング順に、流します。<br />あなたのミュージックライフを楽しませるツールです。是非、使ってみて楽しみましょう。</p>
             <p class="center">lamusica is YouTube music player. Having fun!</p>
     </div>
-
     <!-- /header -->
     <div class="row">
         <div id="form" class="col-md-5">
@@ -63,16 +59,15 @@
         </span>
         <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
     </div>
-    <div id="set-number">
+    <div id="set-number" class="after_view">
         <input type="text" class="form-control right"
                placeholder="Set Number"
                ng-model="number" style="text-align: right" id="number"/>
     </div>
-    <!--<br/>-->
-    <!--<p><a href="detail.html#?q={{artist}}">{{artist}}</a>-->
-    <!--</p>-->
-    <br/>
-    <hr />
+
+    <br />
+    <br />
+    <!--<hr />-->
 
     <div class="row">
         <div id="list">
@@ -94,7 +89,7 @@
     </div>
 
     <br/>
-    <div class="row">
+    <div class="row after_view">
         <div class="col-md-4">
             <h3>Biography</h3>
             <p id="artist_info"></p>
@@ -112,12 +107,11 @@
         <div class="col-md-4"></div>
     </div>
 
-    <hr />
     <div id="footer">
-        <address>
-            &copy; <a href="http://manchan.github.io/">manchan</a>,
+        <p class="center">
+            &copy; <a href="https://github.com/manchan">manchan</a>,
             <b>lamusica</b> using Last.fm Web API, YouTube API, jQuery, AngularJS, Twitter Bootstrap and GitHub
-        </address>
+        </p>
     </div>
 </div>
 </body>
