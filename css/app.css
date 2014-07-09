@@ -51,9 +51,10 @@ a:hover{
   padding-left:20px;
 }
 #set-number {
-  width:110px;
+  width:113px;
   float: left;
   padding-left:20px;
+  margin-right:5px;
   text-align: right;
 }
 .after_view {

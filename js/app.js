@@ -1,5 +1,21 @@
 var app = angular.module('lamusica', ['ng']);
 
+flag = false;
+num = 0;
+function toggle(){
+    flag = !flag;
+    if(flag == true){
+        $('#repeat_btn').text('repeated');
+        $("#repeat_btn").addClass("btn-warning");
+        $("#repeat_btn").removeClass("btn-info");
+    }
+    else{
+        $('#repeat_btn').text('repeat');
+        $("#repeat_btn").addClass("btn-info");
+        $("#repeat_btn").removeClass("btn-warning");
+    }
+}
+
 app.run(function(){
     var tag = document.createElement('script');
     tag.src = "http://www.youtube.com/iframe_api";
@@ -142,6 +158,7 @@ app.service('PlayList', function(){
         return this.list[this.index];
     };
     this.next = function(index){
+
         if(index || typeof index != 'undefined') {
             this.index = index;
         }else if(!this.ready) {
@@ -150,7 +167,8 @@ app.service('PlayList', function(){
             if(this.index + 1 >= this.list.length ) {
                 this.index = 0
             }else{
-                this.index++;
+                // ループじゃない場合
+                if(flag != true) this.index++;
             }
         }
         this.ready = true;
@@ -191,6 +209,7 @@ app.controller('controller', function($scope, $location, Tracks, YouTube, PlayLi
     });
 
     $scope.play = function(index){
+        console.log(index);
         YouTube.play(PlayList.next(index), $scope.play);
         var track = PlayList.current_track();
         if(track) {
@@ -267,3 +286,4 @@ app.controller('controller', function($scope, $location, Tracks, YouTube, PlayLi
     }
 
 });
+
