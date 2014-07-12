@@ -95,8 +95,6 @@ app.factory('ArtistAlbums', function($http) {
 });
 
 
-
-
 app.service('YouTube', function($window, $http){
     this.ready = false;
     this.player = null;
@@ -180,7 +178,7 @@ app.service('PlayList', function(){
     };
 });
 
-app.controller('controller', function($scope, $location, Tracks, YouTube, PlayList, ArtistInfo, ArtistAlbums) {
+app.controller('controller', function($scope, $location, Tracks, YouTube, PlayList, ArtistInfo, ArtistAlbums, $http) {
     $scope.playing = false;
     $scope.title = 'lamusica';
     $scope.number = '';
@@ -209,7 +207,7 @@ app.controller('controller', function($scope, $location, Tracks, YouTube, PlayLi
     });
 
     $scope.play = function(index){
-        console.log(index);
+
         YouTube.play(PlayList.next(index), $scope.play);
         var track = PlayList.current_track();
         if(track) {
@@ -262,6 +260,33 @@ app.controller('controller', function($scope, $location, Tracks, YouTube, PlayLi
             //     this.push(row);
             // }, $scope.similar_artists);
         });
+
+        $scope.errors = [];
+        $scope.item_data = [];
+
+        // remove all error messages
+        $scope.errors.splice(0, $scope.errors.length);
+        $scope.item_data.splice(0, $scope.item_data.length);
+        $('.amz_link li').remove();
+
+        // amazon Product Advertising API
+        $http.post('http://amz-api.appspot.com/', {'keywords': $scope.artist}
+        ).success(function(data, status, headers, config) {
+
+                // Data Get Success
+                if (data != ''){
+                    angular.forEach(data, function(row, i){
+                        $('.amz_link').append(row);
+                    });
+                }
+                // Failure
+                else{
+//                    $scope.errors.push(data.error);
+                }
+            }).error(function(data, status) { // called asynchronously if an error occurs
+                // or server returns response with an error status.
+                $scope.errors.push(status);
+            });
 
         // はじめ非表示を表示状態に
         $('.after_view').css("display", "block");

@@ -31,9 +31,9 @@
 <div class="container">
 
     <div id="header" class="center">
-            <h1><a href="http://manchan.github.io/lamusica/" id="top_title"><img src="images/lamusica.jpg" alt="LAMUSICA" /></a></h1>
-            <p class="jap">LAMUSICA（ラムジカ）は、検索した音楽アーティストの曲をランキング順に、流します。<br />あなたのミュージックライフを楽しませるツールです。是非、使ってみて楽しみましょう。</p>
-            <p class="center">lamusica is YouTube music player. Having fun!</p>
+        <h1><a href="http://manchan.github.io/lamusica/" id="top_title"><img src="images/lamusica.jpg" alt="LAMUSICA" /></a></h1>
+        <p class="jap">LAMUSICA（ラムジカ）は、検索した音楽アーティストの曲をランキング順に、流します。<br />あなたのミュージックライフを楽しませるツールです。是非、使ってみて楽しみましょう。</p>
+        <p class="center">lamusica is YouTube music player. Having fun!</p>
     </div>
     <!-- /header -->
     <div class="row">
@@ -59,7 +59,6 @@
         </span>
         <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
     </div>
-
 
     <div id="set-number" class="after_view">
         <input type="text" class="form-control right"
@@ -95,27 +94,41 @@
 
     <br/>
     <div class="row after_view">
-        <div class="col-md-4">
+        <div class="col-md-6">
             <h3>Biography</h3>
-            <p id="artist_info"></p>
-        </div>
-
-        <div class="col-md-4">
-            <h3>Similar</h3>
-            <div ng-repeat="artist in similar_artists">
-                <a class="clearfix" ng-click="similar(artist.name)" ng-class="active_class($index)">
-                    <img ng-src="{{ artist.image[1]['#text'] }}" class="pull-left">
-                    <b class="pull-left">{{ artist.name }}</b>
-                </a>
+            <div>
+                <p id="artist_info"></p>
             </div>
         </div>
-        <div class="col-md-4"></div>
+        <div class="col-md-6">
+            <h3>Similar</h3>
+            <div ng-repeat="artist in similar_artists">
+                <li class="similar_link">
+                    <a class="clearfix" ng-click="similar(artist.name)" ng-class="active_class($index)">
+                        <img ng-src="{{ artist.image[1]['#text'] }}" class="pull-left">
+                        <b class="pull-left">{{ artist.name }}</b>
+                    </a>
+                </li>
+            </div>
+        </div>
+    </div>
+
+    <!--  Amazon Link  -->
+    <div class="row after_view">
+        <div class="col-md-12">
+            <h3>Albums</h3>
+            <ul>
+                <li class="err" ng-repeat="error in errors"> {{ error }} </li>
+            </ul>
+            <ul class="amz_link">
+            </ul>
+        </div>
     </div>
 
     <div id="footer">
         <p class="center">
             &copy; <a href="https://github.com/manchan">manchan</a>,
-            <b>lamusica</b> using Last.fm Web API, YouTube API, jQuery, AngularJS, Twitter Bootstrap and GitHub
+            <b>lamusica</b> using Last.fm Web API, YouTube API, amazon Product Advertising API, jQuery, AngularJS, Twitter Bootstrap and GitHub
         </p>
     </div>
 </div>

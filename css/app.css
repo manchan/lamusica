@@ -13,6 +13,9 @@ p {
 h1 {
   font-weight:bold;
 }
+h3 {
+  color: #EB6100;
+}
 a {
   color: #EB6100;
   cursor: pointer;
@@ -128,3 +131,33 @@ address {
 .tt-suggestion p{
   color: gray;
 }
+
+#artist_info{
+    margin-top: 30px;
+}
+li.similar_link{
+    float: left;
+    margin-bottom:10px;
+    width: 230px;
+    height: 90px;
+}
+ul.amz_link {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    width:980px;
+}
+ul.amz_link li {
+    padding: 10px;
+    float: left;
+    /*margin-right:20px;*/
+    margin-bottom:20px;
+    /*text-align: center;*/
+    width:240px;
+    height: 220px;
+    overflow: auto;
+}
+.clearLeft {
+    clear: left;
+}
+
