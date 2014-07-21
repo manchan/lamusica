@@ -5,14 +5,27 @@ num = 0;
 function toggle(){
     flag = !flag;
     if(flag == true){
-        $('#repeat_btn').text('repeated');
         $("#repeat_btn").addClass("btn-warning");
         $("#repeat_btn").removeClass("btn-info");
     }
     else{
-        $('#repeat_btn').text('repeat');
-        $("#repeat_btn").addClass("btn-info");
+        $("#repeat_btn").addClass("btn btn-default");
         $("#repeat_btn").removeClass("btn-warning");
+    }
+}
+left_disp = false;
+
+function left_artist(){
+    left_disp = !left_disp;
+    if(left_disp == true){
+        $(".l_col_fix").animate( { opacity: 'show',}, { duration: 1000, easing: 'swing', } );
+        $("#left_btn").addClass("btn-warning");
+        $("#left_btn").removeClass("btn-default");
+    }
+    else{
+        $(".l_col_fix").animate( { opacity: 'hide',}, { duration: 1000, easing: 'swing', } );
+        $("#left_btn").addClass("btn-default");
+        $("#left_btn").removeClass("btn-warning");
     }
 }
 
@@ -71,23 +84,23 @@ app.factory('ArtistInfo', function($http) {
     };
 });
 
-app.factory('ArtistAlbums', function($http) {
+app.factory('ChartTopArtists', function($http) {
 
     return {
         get : function(query, callback) {
             $http.jsonp('http://ws.audioscrobbler.com/2.0/', {
                 params : {
                     api_key : '6a6281367c3ad09f1b4a7c15dc50675b',
-                    method : 'artist.gettopalbums',
+                    method : 'chart.getTopArtists',
+                    period : '1month',
                     format : 'json',
-                    callback : 'JSON_CALLBACK',
-                    artist : query,
-                    limit : 10
-
+                    callback : 'JSON_CALLBACK'
                 }
             }).success(function(data){
 
-//                console.log(data.topalbums.album);
+                if(data.artists.artist) {
+                    callback(data.artists.artist);
+                }
                 return [];
             });
         }
@@ -178,7 +191,7 @@ app.service('PlayList', function(){
     };
 });
 
-app.controller('controller', function($scope, $location, Tracks, YouTube, PlayList, ArtistInfo, ArtistAlbums, $http) {
+app.controller('controller', function($scope, $location, Tracks, YouTube, PlayList, ArtistInfo, ChartTopArtists, $http) {
     $scope.playing = false;
     $scope.title = 'lamusica';
     $scope.number = '';
@@ -204,6 +217,19 @@ app.controller('controller', function($scope, $location, Tracks, YouTube, PlayLi
     }).on('typeahead:selected typeahead:autocompleted', function (e, datum) {
         $scope.artist = datum.value;
         $scope.submit(true);
+    });
+
+
+    ChartTopArtists.get('', function(artists){
+        $scope.top_artists = [];
+        angular.forEach(artists, function(row, i){
+            this.push(row);
+        }, $scope.top_artists);
+
+        // ランダム表示
+        $scope.top_artists = $scope.top_artists.map(function(a){return {weight:Math.random(), value:a}})
+            .sort(function(a, b){return a.weight - b.weight})
+            .map(function(a){return a.value});
     });
 
     $scope.play = function(index){
@@ -249,16 +275,6 @@ app.controller('controller', function($scope, $location, Tracks, YouTube, PlayLi
             angular.forEach(artist_info.similar.artist, function(row, i){
                 this.push(row);
             }, $scope.similar_artists);
-        });
-
-        ArtistAlbums.get($scope.artist, function(artist_albums){
-
-            // TODO apply to Angular
-            // $('#artist_info').html(artist_info.bio.content);
-            // $scope.similar_artists = [];
-            // angular.forEach(artist_info.similar.artist, function(row, i){
-            //     this.push(row);
-            // }, $scope.similar_artists);
         });
 
         $scope.errors = [];
@@ -309,6 +325,6 @@ app.controller('controller', function($scope, $location, Tracks, YouTube, PlayLi
     }else{
         angular.element('#list-intro').fadeIn();
     }
-
 });
+
 

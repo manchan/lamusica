@@ -27,28 +27,48 @@
         ga('send', 'pageview');
     </script>
 </head>
-<body>
-<div class="container">
+<body data-spy="scroll" data-target=".bs-docs-sidebar">
 
-    <div id="header" class="center">
-        <h1><a href="http://manchan.github.io/lamusica/" id="top_title"><img src="images/lamusica.jpg" alt="LAMUSICA" /></a></h1>
-        <p class="jap">LAMUSICA（ラムジカ）は、検索した音楽アーティストの曲をランキング順に、流します。<br />あなたのミュージックライフを楽しませるツールです。是非、使ってみて楽しみましょう。</p>
-        <p class="center">lamusica is YouTube music player. Having fun!</p>
-    </div>
-    <!-- /header -->
-    <div class="row">
-        <div id="form" class="col-md-5">
-            <form role="form" ng-submit="submit(true)">
-                <div class="form-group">
-                    <input type="text" class="form-control typeahead"
-                           placeholder="Artist name"
-                           ng-model="artist" />
-                    <button type="submit" class="btn btn-default"><b>Play</b></button>
-                </div>
-            </form>
+<div class="container">
+    <div class="left_side">
+        <button type="button" class="btn btn-default" id="left_btn" onclick="left_artist()">
+            <i class="glyphicon glyphicon-headphones"></i>
+            <b>Trend</b>
+        </button>
+        <div class="l_col_fix sidebar-nav affix" role="complementary" style="display: none;">
+            <ul>
+                <li ng-repeat="artists in top_artists" style="position: relative; margin-top:10px;">
+                    <a class="clearfix" ng-click="similar(artists.name)" ng-class="active_class($index)">
+                        <img ng-src="{{ artists.image[1]['#text'] }}" class="pull-left" width="64" height="64">
+                        <br/>
+                        <p class="pull-left" style="position: absolute; top: 50px; width: 80px;">{{ artists.name }}</p>
+                    </a>
+                </li>
+            </ul>
         </div>
     </div>
-    <div id="social-buttons">
+
+    <div class="main">
+        <div id="header" class="center">
+            <h1><a href="http://manchan.github.io/lamusica/" id="top_title"><img src="images/lamusica.jpg" alt="LAMUSICA" /></a></h1>
+            <p class="jap">LAMUSICA（ラムジカ）は、検索した音楽アーティストの曲をランキング順に、流します。<br />あなたのミュージックライフを楽しませるツールです。是非、使ってみて楽しみましょう。</p>
+            <p class="center">lamusica is YouTube music player. Having fun!</p>
+        </div>
+
+        <!-- /header -->
+        <div class="row">
+            <div id="form" class="col-md-5">
+                <form role="form" ng-submit="submit(true)">
+                    <div class="form-group">
+                        <input type="text" class="form-control typeahead"
+                               placeholder="Artist name"
+                               ng-model="artist" />
+                        <button type="submit" class="btn btn-default"><b>Play</b></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="social-buttons">
         <span style="margin-right:4px;">
             <a href="http://b.hatena.ne.jp/entry/http://manchan.github.io/lamusica/" class="hatena-bookmark-button" data-hatena-bookmark-title="lamusica" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="en" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
         </span>
@@ -57,79 +77,84 @@
         </span>
         <span style="margin-right:4px;" id="tweetButtonWrapper">
         </span>
-        <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
-    </div>
-
-    <div id="set-number" class="after_view">
-        <input type="text" class="form-control right"
-               placeholder="Set Number"
-               ng-model="number" style="text-align: right" id="number"/>
-    </div>
-    <div class="after_view">
-        <button type="button" class="btn btn-info" id="repeat_btn" onclick="toggle()">repeat</button>
-    </div>
-
-    <br />
-    <br />
-    <!--<hr />-->
-
-    <div class="row">
-        <div id="list">
-            <div id="list-intro">
-                <!--<p><b>lamusica</b> is YouTube music player</p>-->
-                <!--<p>Having fun!</p>-->
-            </div>
-            <div class="list-item" ng-repeat="track in tracks">
-                <a class="clearfix" ng-click="click($index)" ng-class="active_class($index)">
-                    <img ng-src="{{ track.image[1]['#text'] }}" class="pull-left">
-                    <b class="pull-left">{{ track.name }}</b>
-                </a>
-            </div>
+            <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
         </div>
 
-        <div id="content">
-            <div id="player"></div>
-        </div>
-    </div>
 
-    <br/>
-    <div class="row after_view">
-        <div class="col-md-6">
-            <h3>Biography</h3>
-            <div>
-                <p id="artist_info"></p>
-            </div>
+        <div id="set-number" class="after_view">
+            <input type="text" class="form-control right"
+                   placeholder="Set Number"
+                   ng-model="number" style="text-align: right" id="number"/>
         </div>
-        <div class="col-md-6">
-            <h3>Similar</h3>
-            <div ng-repeat="artist in similar_artists">
-                <li class="similar_link">
-                    <a class="clearfix" ng-click="similar(artist.name)" ng-class="active_class($index)">
-                        <img ng-src="{{ artist.image[1]['#text'] }}" class="pull-left">
-                        <b class="pull-left">{{ artist.name }}</b>
+        <div class="after_view">
+            <button type="button" class="btn btn btn-default" id="repeat_btn" onclick="toggle()">
+                <span class="glyphicon glyphicon-repeat"></span>
+            </button>
+        </div>
+
+        <br />
+        <br />
+        <!--<hr />-->
+
+        <div class="row">
+            <div id="list">
+                <div id="list-intro">
+                    <!--<p><b>lamusica</b> is YouTube music player</p>-->
+                    <!--<p>Having fun!</p>-->
+                </div>
+                <div class="list-item" ng-repeat="track in tracks">
+                    <a class="clearfix" ng-click="click($index)" ng-class="active_class($index)">
+                        <img ng-src="{{ track.image[1]['#text'] }}" class="pull-left">
+                        <b class="pull-left">{{ track.name }}</b>
                     </a>
-                </li>
+                </div>
+            </div>
+
+            <div id="content">
+                <div id="player"></div>
             </div>
         </div>
-    </div>
 
-    <!--  Amazon Link  -->
-    <div class="row after_view">
-        <div class="col-md-12">
-            <h3>Albums</h3>
-            <ul>
-                <li class="err" ng-repeat="error in errors"> {{ error }} </li>
-            </ul>
-            <ul class="amz_link">
-            </ul>
+        <br/>
+        <div class="row after_view">
+            <div class="col-md-6">
+                <h3>Biography</h3>
+                <div>
+                    <p id="artist_info"></p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h3>Similar</h3>
+                <div ng-repeat="artist in similar_artists">
+                    <li class="similar_link">
+                        <a class="clearfix" ng-click="similar(artist.name)" ng-class="active_class($index)">
+                            <img ng-src="{{ artist.image[1]['#text'] }}" class="pull-left">
+                            <b class="pull-left">{{ artist.name }}</b>
+                        </a>
+                    </li>
+                </div>
+            </div>
         </div>
-    </div>
 
-    <div id="footer">
-        <p class="center">
-            &copy; <a href="https://github.com/manchan">manchan</a>,
-            <b>lamusica</b> using Last.fm Web API, YouTube API, amazon Product Advertising API, jQuery, AngularJS, Twitter Bootstrap and GitHub
-        </p>
+        <!--  Amazon Link  -->
+        <div class="row after_view">
+            <div class="col-md-12">
+                <h3>Albums</h3>
+                <ul>
+                    <li class="err" ng-repeat="error in errors"> {{ error }} </li>
+                </ul>
+                <ul class="amz_link">
+                </ul>
+            </div>
+        </div>
+
+        <div id="footer">
+            <p class="center">
+                <span class="glyphicon glyphicon-copyright-mark"></span>
+                <a href="https://github.com/manchan">manchan</a>,
+                <b>lamusica</b> using Last.fm Web API, YouTube API, amazon Product Advertising API, jQuery, AngularJS, Twitter Bootstrap and GitHub
+            </p>
+        </div>
     </div>
 </div>
 </body>
