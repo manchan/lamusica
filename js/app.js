@@ -94,6 +94,7 @@ app.factory('ChartTopArtists', function($http) {
                     method : 'chart.getTopArtists',
                     period : '1month',
                     format : 'json',
+                    limit  : 10,
                     callback : 'JSON_CALLBACK'
                 }
             }).success(function(data){
