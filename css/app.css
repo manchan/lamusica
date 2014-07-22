@@ -27,7 +27,7 @@ a:hover{
 .container {
     float: left;
     margin-bottom:80px;
-    width:1280px;
+    width:100%;
     margin: 0 auto;
 }
 #header {
@@ -57,9 +57,9 @@ a:hover{
   padding-left:20px;
 }
 #set-number {
-  width:113px;
+  width:90px;
   float: left;
-  padding-left:20px;
+  /*padding-left:20px;*/
   margin-right:5px;
   text-align: right;
 }
@@ -68,10 +68,8 @@ a:hover{
 }
 
 #content {
-  width:620px;
   float:right;
-  /*padding-left:20px;*/
-  margin-right:100px;
+  margin-right:200px;
 }
 #list-intro {
   font-family:'YuGothic', 'Yu Gothic', 'Hiragino Kaku Gothic Pro', 'Meiryo', sans-serif;
@@ -81,7 +79,7 @@ a:hover{
 #list {
   width:320px;
   float:left;
-  padding-right:20px;
+  padding-left:15px;
   /*border-right: 1px solid #ccc;*/
 }
 .list-item {
@@ -161,12 +159,14 @@ ul.amz_link li {
 }
 .left_side{
     float: left;
-    width: 110px;
+    width: 10%;
 }
 .main{
     float: left;
     margin-left: 20px;
-    width: 1100px;
+    width: 90%;
+    position:absolute;
+    left:10%;
     margin-right: 20px;
 }
 .clearLeft {
