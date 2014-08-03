@@ -15,6 +15,10 @@ function toggle(){
 }
 left_disp = false;
 
+$(function(){
+    left_artist();
+});
+
 function left_artist(){
     left_disp = !left_disp;
     if(left_disp == true){
