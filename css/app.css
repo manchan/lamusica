@@ -175,9 +175,20 @@ ul.amz_link li {
 }
 #left_btn{
     float: left;
-    width: 70px;
-    margin-top: 7px;
+    width: 100px;
+    margin-top: 10px;
+    margin-left: 0px;
+    height: 30px;
+    background: url("../images/trend_off.png");
+    /*-webkit-transition: width 1s;*/
+    /*transition: width 1s;*/
 }
+
+#left_btn:hover{
+
+    /*background: url("../images/trend_on.png");*/
+}
+
 .l_col_fix {
     float: left;
     margin-top: 40px;
