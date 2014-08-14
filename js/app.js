@@ -5,12 +5,12 @@ num = 0;
 function toggle(){
     flag = !flag;
     if(flag == true){
-//        $("#repeat_btn").addClass("btn-warning");
-//        $("#repeat_btn").removeClass("btn-info");
+        $("#repeat_btn").addClass("btn-warning");
+        $("#repeat_btn").removeClass("btn-info");
     }
     else{
-//        $("#repeat_btn").addClass("btn btn-default");
-//        $("#repeat_btn").removeClass("btn-warning");
+        $("#repeat_btn").addClass("btn btn-default");
+        $("#repeat_btn").removeClass("btn-warning");
     }
 }
 
