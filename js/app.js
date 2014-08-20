@@ -135,7 +135,7 @@ app.service('YouTube', function($window, $http){
         var query = track.name + ' ' + track.artist.name;
         $http.jsonp('http://gdata.youtube.com/feeds/api/videos', {
             params : {
-                q: query + ' -みた -コピ -カラオケ -ピアノ -弾き語り -カバー -ヒトカラ -cover',
+                q: query + ' -みた -コピ -カラオケ -ピアノ -弾き語り -カバー -ヒトカラ',
                 'max-results' : 2,
                 format : 5,
                 alt : 'json-in-script',
