@@ -2,6 +2,8 @@ var app = angular.module('lamusica', ['ng']);
 
 flag = false;
 num = 0;
+left_disp = false;
+
 function toggle(){
     flag = !flag;
     if(flag == true){
@@ -13,11 +15,6 @@ function toggle(){
         $("#repeat_btn").removeClass("btn-warning");
     }
 }
-
-
-
-
-left_disp = false;
 
 $(function(){
     left_artist();
@@ -110,10 +107,10 @@ app.factory('ChartTopArtists', function($http) {
             $http.jsonp('http://ws.audioscrobbler.com/2.0/', {
                 params : {
                     api_key : '6a6281367c3ad09f1b4a7c15dc50675b',
-                    method : 'chart.getTopArtists',
+                    method : 'chart.getHypedArtists',
                     period : '1month',
                     format : 'json',
-                    limit  : 10,
+                    limit  : 100,
                     callback : 'JSON_CALLBACK'
                 }
             }).success(function(data){
