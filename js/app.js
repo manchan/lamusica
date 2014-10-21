@@ -254,7 +254,7 @@ app.controller('controller', function($scope, $location, Tracks, YouTube, PlayLi
         YouTube.play(PlayList.next(index), $scope.play);
         var track = PlayList.current_track();
         if(track) {
-            $scope.title = track.name + ' by ' + track.artist.name + ' - lamusica';
+            $scope.title = track.name + ' by ' + track.artist.name + ' - lamusica #lamusicafree';
             $("#tweetButtonWrapper").html(
                 '<a href="https://twitter.com/share" data-url="' + location.href + '" class="twitter-share-button"  data-text="'+ $scope.title + '" data-lang="en">Tweet</a>'
             );
