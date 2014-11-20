@@ -1,8 +1,8 @@
 var app = angular.module('lamusica', ['ng']);
 
-flag = false;
-num = 0;
-left_disp = false;
+var flag = false;
+var num = 0;
+var left_disp = false;
 
 function toggle(){
     flag = !flag;
@@ -67,11 +67,11 @@ app.factory('Tracks', function($http) {
                     artist : query
                 }
             }).success(function(data){
-                if(data.toptracks) {
-                    callback(data.toptracks.track);
-                }
-                return [];
-            });
+                    if(data.toptracks) {
+                        callback(data.toptracks.track);
+                    }
+                    return [];
+                });
             return [];
         }
     };
@@ -91,11 +91,11 @@ app.factory('ArtistInfo', function($http) {
                 }
             }).success(function(data){
 
-                if(data.artist) {
-                    callback(data.artist);
-                }
-                return [];
-            });
+                    if(data.artist) {
+                        callback(data.artist);
+                    }
+                    return [];
+                });
         }
     };
 });
@@ -115,11 +115,11 @@ app.factory('ChartTopArtists', function($http) {
                 }
             }).success(function(data){
 
-                if(data.artists.artist) {
-                    callback(data.artists.artist);
-                }
-                return [];
-            });
+                    if(data.artists.artist) {
+                        callback(data.artists.artist);
+                    }
+                    return [];
+                });
         }
     };
 });
@@ -128,8 +128,14 @@ app.factory('ChartTopArtists', function($http) {
 app.service('YouTube', function($window, $http){
     this.ready = false;
     this.player = null;
-    this.play = function(track, callback) {
-        var query = track.name + ' ' + track.artist.name;
+    this.play = function(track, callback, song) {
+
+        if(song) {
+            var query = song + ' ' + track.artist.name;
+        }else{
+            var query = track.name + ' ' + track.artist.name;
+        }
+
         $http.jsonp('http://gdata.youtube.com/feeds/api/videos', {
             params : {
                 q: query + ' -みた -コピ -カラオケ -ピアノ -弾き語り -カバー -ヒトカラ',
@@ -140,37 +146,37 @@ app.service('YouTube', function($window, $http){
             }
         }).success(function(data){
 
-            if(data.feed.entry) {
-                data.feed.entry.sort(function(a,b){
-                    return b['favoriteCount'] - a['favoriteCount'];
-                });
-                var permalink = data.feed.entry[0]['id']['$t'];
-                var id = permalink.match(/^.+\/(.+?)$/)[1];
-                if(this.ready) {
-                    this.player.clearVideo();
-                    this.player.loadVideoById(id);
-                }else{
-                    this.player = new YT.Player('player', {
-                        height: '400',
-                        width: '600',
-                        videoId : id,
-                        playerVars: { 'autoplay': 1, 'rel': 0 },
-                        events : {
-                            onStateChange : function (event){
-                                if(event.data == YT.PlayerState.ENDED ) {
-                                    callback();
+                if(data.feed.entry) {
+                    data.feed.entry.sort(function(a,b){
+                        return b['favoriteCount'] - a['favoriteCount'];
+                    });
+                    var permalink = data.feed.entry[0]['id']['$t'];
+                    var id = permalink.match(/^.+\/(.+?)$/)[1];
+                    if(this.ready) {
+                        this.player.clearVideo();
+                        this.player.loadVideoById(id);
+                    }else{
+                        this.player = new YT.Player('player', {
+                            height: '400',
+                            width: '600',
+                            videoId : id,
+                            playerVars: { 'autoplay': 1, 'rel': 0 },
+                            events : {
+                                onStateChange : function (event){
+                                    if(event.data == YT.PlayerState.ENDED ) {
+                                        callback();
+                                    }
                                 }
                             }
-                        }
-                    });
+                        });
+                    }
+                }else{
+                    callback();
                 }
-            }else{
+                this.ready = true;
+            }).error(function(error){
                 callback();
-            }
-            this.ready = true;
-        }).error(function(error){
-            callback();
-        });
+            });
     };
 });
 
@@ -232,9 +238,9 @@ app.controller('controller', function($scope, $location, Tracks, YouTube, PlayLi
             }
         }
     }).on('typeahead:selected typeahead:autocompleted', function (e, datum) {
-        $scope.artist = datum.value;
-        $scope.submit(true);
-    });
+            $scope.artist = datum.value;
+            $scope.submit(true);
+        });
 
 
     ChartTopArtists.get('', function(artists){
@@ -249,12 +255,19 @@ app.controller('controller', function($scope, $location, Tracks, YouTube, PlayLi
             .map(function(a){return a.value});
     });
 
-    $scope.play = function(index){
+    $scope.play = function(index, song){
 
-        YouTube.play(PlayList.next(index), $scope.play);
+        if(song && !index){
+            // index search
+            index = _.indexOf(_.pluck(PlayList.list, 'name'), song);
+        }
+        YouTube.play(PlayList.next(index), $scope.play, song);
         var track = PlayList.current_track();
         if(track) {
             $scope.title = track.name + ' by ' + track.artist.name + ' - lamusica #lamusicafree';
+            // params set
+            $location.search('song', track.name);
+
             $("#tweetButtonWrapper").html(
                 '<a href="https://twitter.com/share" data-url="' + location.href + '" class="twitter-share-button"  data-text="'+ $scope.title + '" data-lang="en">Tweet</a>'
             );
@@ -270,7 +283,6 @@ app.controller('controller', function($scope, $location, Tracks, YouTube, PlayLi
         if (!$scope.playing) angular.element('#form .typeahead').typeahead('setQuery', $scope.artist);
         PlayList.clear();
         $location.search('q', $scope.artist);
-
         $scope.title = $scope.artist + ' - lamusica';
 
         Tracks.get($scope.artist, function(tracks){
@@ -280,7 +292,11 @@ app.controller('controller', function($scope, $location, Tracks, YouTube, PlayLi
             });
             $scope.tracks = tracks;
             if(autoplay) {
-                $scope.play();
+                // Artist名、変更した場合
+                if($location.search().q != $scope.artist){
+                    $scope.song = false;
+                }
+                $scope.play(undefined, $scope.song);
             }
             angular.element('.tt-dropdown-menu').hide();
         });
@@ -312,10 +328,6 @@ app.controller('controller', function($scope, $location, Tracks, YouTube, PlayLi
                         $('.amz_link').append(row);
                     });
                 }
-                // Failure
-                else{
-//                    $scope.errors.push(data.error);
-                }
             }).error(function(data, status) { // called asynchronously if an error occurs
                 // or server returns response with an error status.
                 $scope.errors.push(status);
@@ -336,12 +348,12 @@ app.controller('controller', function($scope, $location, Tracks, YouTube, PlayLi
     $scope.active_class = function(index){
         if($scope.playing && PlayList.index == index) return 'list-active';
     };
+    // urlからの場合
     if($location.search().q) {
         $scope.artist = $location.search().q;
+        $scope.song = $location.search().song;
         $scope.submit(true);
     }else{
         angular.element('#list-intro').fadeIn();
     }
 });
-
-
