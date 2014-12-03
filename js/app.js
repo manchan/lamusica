@@ -17,7 +17,6 @@ function toggle(){
 }
 
 $(function(){
-    left_artist();
     $('#left_btn').hover(function(){
         $('#left_btn').stop().animate({width: 100}, {duration:100,
             complete: function () {
@@ -35,15 +34,6 @@ $(function(){
     });
 });
 
-function left_artist(){
-    left_disp = !left_disp;
-    if(left_disp == true){
-        $(".l_col_fix").animate( { opacity: 'show',}, { duration: 1000, easing: 'swing', } );
-    }
-    else{
-        $(".l_col_fix").animate( { opacity: 'hide',}, { duration: 1000, easing: 'swing', } );
-    }
-}
 
 app.run(function(){
     var tag = document.createElement('script');
@@ -55,7 +45,6 @@ app.run(function(){
 app.factory('Tracks', function($http) {
     return {
         get : function(query, callback) {
-
             var num = angular.element('#number').val();
             $http.jsonp('http://ws.audioscrobbler.com/2.0/', {
                 params : {
@@ -104,10 +93,15 @@ app.factory('ChartTopArtists', function($http) {
 
     return {
         get : function(query, callback) {
+
+            // 急上昇かトップアーティストどちらか
+            var methods = ['chart.getHypedArtists', 'chart.getTopArtists'];
+            var select_method = methods[ Math.random() * methods.length >> 0 ];
+
             $http.jsonp('http://ws.audioscrobbler.com/2.0/', {
                 params : {
                     api_key : '6a6281367c3ad09f1b4a7c15dc50675b',
-                    method : 'chart.getHypedArtists',
+                    method : select_method,
                     period : '1month',
                     format : 'json',
                     limit  : 100,
@@ -242,19 +236,6 @@ app.controller('controller', function($scope, $location, Tracks, YouTube, PlayLi
             $scope.submit(true);
         });
 
-
-    ChartTopArtists.get('', function(artists){
-        $scope.top_artists = [];
-        angular.forEach(artists, function(row, i){
-            this.push(row);
-        }, $scope.top_artists);
-
-        // ランダム表示
-        $scope.top_artists = $scope.top_artists.map(function(a){return {weight:Math.random(), value:a}})
-            .sort(function(a, b){return a.weight - b.weight})
-            .map(function(a){return a.value});
-    });
-
     $scope.play = function(index, song){
 
         if(song && !index){
@@ -275,6 +256,32 @@ app.controller('controller', function($scope, $location, Tracks, YouTube, PlayLi
             $scope.playing = true;
         }
     };
+
+    $scope.trend_artist = function(){
+
+        $scope.top_artists = [];
+        left_disp = !left_disp;
+        if(left_disp == true){
+
+            ChartTopArtists.get('', function(artists){
+                console.log(artists.length);
+                angular.forEach(artists, function(row, i){
+                    this.push(row);
+                }, $scope.top_artists);
+
+                // ランダム表示
+                $scope.top_artists = $scope.top_artists.map(function(a){return {weight:Math.random(), value:a}})
+                    .sort(function(a, b){return a.weight - b.weight})
+                    .map(function(a){return a.value});
+            });
+            $(".l_col_fix").animate( { opacity: 'show'}, { duration: 1000, easing: 'swing' } );
+        }
+        else{
+            $(".l_col_fix").animate( { opacity: 'hide'}, { duration: 1000, easing: 'swing' } );
+        }
+    };
+    $scope.trend_artist();
+
     $scope.submit = function(autoplay, query){
 
         $scope.artist = query || angular.element('.tt-query').val() || $location.search().q;
