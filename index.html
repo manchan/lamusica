@@ -27,7 +27,7 @@
 
         <div class="l_col_fix sidebar-nav affix" role="complementary" style="display: none;">
             <ul>
-                <li ng-repeat="artists in top_artists" style="position: relative; margin-top:10px;">
+                <li ng-repeat="artists in top_artists" class="artist_img">
                     <a class="clearfix" ng-click="similar(artists.name)" ng-class="active_class($index)">
                         <img ng-src="{{ artists.image[1]['#text'] }}" class="pull-left" width="64" height="64">
                         <br/>
@@ -61,18 +61,6 @@
                 </form>
             </div>
         </div>
-        <div id="social-buttons">
-        <span style="margin-right:4px;">
-            <a href="http://b.hatena.ne.jp/entry/http://manchan.github.io/lamusica/" class="hatena-bookmark-button" data-hatena-bookmark-title="lamusica" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="en" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
-        </span>
-        <span style="margin-right:5px;">
-          <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fmanchan.github.io%2Flamusica%2F&amp;width&amp;layout=button_count&amp;action=like&amp;show_faces=true&amp;share=true&amp;height=21" scrolling="no" frameborder="0" style="border:none; height:21px;width:175px;"  allowTransparency="true"></iframe>
-        </span>
-        <span style="margin-right:4px;" id="tweetButtonWrapper">
-        </span>
-            <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
-        </div>
-
 
         <div id="set-number" class="after_view">
             <input type="text" class="form-control right"
@@ -141,7 +129,18 @@
             </div>
         </div>
 
-
+        <!-- Social Buttons -->
+        <div id="social-buttons">
+        <span style="margin-right:4px;">
+            <a href="http://b.hatena.ne.jp/entry/http://manchan.github.io/lamusica/" class="hatena-bookmark-button" data-hatena-bookmark-title="lamusica" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="en" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        </span>
+        <span style="margin-right:5px;">
+          <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fmanchan.github.io%2Flamusica%2F&amp;width&amp;layout=button_count&amp;action=like&amp;show_faces=true&amp;share=true&amp;height=21" scrolling="no" frameborder="0" style="border:none; height:21px;width:175px;"  allowTransparency="true"></iframe>
+        </span>
+        <span style="margin-right:4px;" id="tweetButtonWrapper">
+        </span>
+            <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+        </div>
 
         <!--FB Like-->
         <div
@@ -160,7 +159,24 @@
     </div>
 </div>
 
-<script>  window.fbAsyncInit =function(){    FB.init({      appId      :'329629697229096',      xfbml      :true,      version    :'v2.2'    });  };  (function(d, s, id){     var js, fjs = d.getElementsByTagName(s)[0];     if(d.getElementById(id)){return;}     js = d.createElement(s); js.id = id;     js.src ="//connect.facebook.net/en_US/sdk.js";     fjs.parentNode.insertBefore(js, fjs);   }(document,'script','facebook-jssdk'));</script>
+<script>
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId      : '738992552848747',
+            xfbml      : true,
+            version    : 'v2.2'
+        });
+    };
+
+    (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
+
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
