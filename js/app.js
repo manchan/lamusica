@@ -264,7 +264,6 @@ app.controller('controller', function($scope, $location, Tracks, YouTube, PlayLi
         if(left_disp == true){
 
             ChartTopArtists.get('', function(artists){
-                console.log(artists.length);
                 angular.forEach(artists, function(row, i){
                     this.push(row);
                 }, $scope.top_artists);
@@ -274,16 +273,19 @@ app.controller('controller', function($scope, $location, Tracks, YouTube, PlayLi
                     .sort(function(a, b){return a.weight - b.weight})
                     .map(function(a){return a.value});
             });
+
             $(".l_col_fix").animate( { opacity: 'show'}, { duration: 1000, easing: 'swing' } );
         }
         else{
-            $(".l_col_fix").animate( { opacity: 'hide'}, { duration: 1000, easing: 'swing' } );
+            $(".l_col_fix").animate( { opacity: 'hide'}, { duration: 2000, easing: 'swing' } );
         }
     };
     $scope.trend_artist();
 
     $scope.submit = function(autoplay, query){
 
+        // 一つ前のArtist取得
+        $scope.prev_artist = $location.search().q;
         $scope.artist = query || angular.element('.tt-query').val() || $location.search().q;
 
         if (!$scope.artist || typeof $scope.artist == 'undefined') return;
@@ -300,8 +302,10 @@ app.controller('controller', function($scope, $location, Tracks, YouTube, PlayLi
             $scope.tracks = tracks;
             if(autoplay) {
                 // Artist名、変更した場合
-                if($location.search().q != $scope.artist){
+                if($location.search().q != $scope.prev_artist){
                     $scope.song = false;
+                    // params set
+                    $location.search('song', '');
                 }
                 $scope.play(undefined, $scope.song);
             }
