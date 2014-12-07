@@ -17,21 +17,21 @@ function toggle(){
 }
 
 $(function(){
-    $('#left_btn').hover(function(){
-        $('#left_btn').stop().animate({width: 100}, {duration:100,
-            complete: function () {
-                $('#left_btn').css("width", "140px").css("background","url(images/trend_on.png)");
-            }
-        });
-
-    }, function(){
-
-        $('#left_btn').stop().animate({width: 100}, {duration:100,
-            complete: function () {
-                $('#left_btn').css("background","url(images/trend_off.png)");
-            }
-        });
-    });
+//    $('#left_btn').hover(function(){
+//        $('#left_btn').stop().animate({width: 100}, {duration:100,
+//            complete: function () {
+//                $('#left_btn').css("width", "140px").css("background","url(images/trend_on.png)");
+//            }
+//        });
+//
+//    }, function(){
+//
+//        $('#left_btn').stop().animate({width: 100}, {duration:100,
+//            complete: function () {
+//                $('#left_btn').css("background","url(images/trend_off.png)");
+//            }
+//        });
+//    });
 });
 
 

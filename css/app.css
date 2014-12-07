@@ -185,6 +185,7 @@ ul.amz_link li {
 }
 
 #left_btn:hover{
+    opacity: 0.5;
     /*background: url("../images/trend_on.png");*/
 }
 
@@ -240,3 +241,13 @@ img:hover,
     -webkit-transition: all 0.5s linear;
     transition: all 0.5s linear;
 }
+
+/*body {*/
+    /*background-color: #4fb4e8;*/
+    /*background: -webkit-linear-gradient(left, #e47d7d 0%, #c195d3 48%, #4fb4e8 100%);*/
+    /*background: -moz-linear-gradient(left, #e47d7d 0%, #c195d3 48%, #4fb4e8 100%);*/
+    /*background: -ms-linear-gradient(left, #e47d7d 0%, #c195d3 48%, #4fb4e8 100%);*/
+    /*background: -o-linear-gradient(left, #e47d7d 0%, #c195d3 48%, #4fb4e8 100%);*/
+    /*background: linear-gradient(to right, #e47d7d 0%, #c195d3 48%, #4fb4e8 100%);*/
+    /*filter: progid:DXImageTransform.Microsoft.gradient(GradientType=1, StartColorStr='#e47d7d', EndColorStr='#4fb4e8'); }*/
+/*}*/
