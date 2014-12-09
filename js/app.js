@@ -1,39 +1,8 @@
-var app = angular.module('lamusica', ['ng']);
+var app = angular.module('lamusica', ['ng', 'ngAnimate', 'mgcrea.ngStrap']);
 
-var flag = false;
 var num = 0;
+var repeat_flag = false;
 var left_disp = false;
-
-function toggle(){
-    flag = !flag;
-    if(flag == true){
-        $("#repeat_btn").addClass("btn-warning");
-        $("#repeat_btn").removeClass("btn-info");
-    }
-    else{
-        $("#repeat_btn").addClass("btn btn-default");
-        $("#repeat_btn").removeClass("btn-warning");
-    }
-}
-
-$(function(){
-//    $('#left_btn').hover(function(){
-//        $('#left_btn').stop().animate({width: 100}, {duration:100,
-//            complete: function () {
-//                $('#left_btn').css("width", "140px").css("background","url(images/trend_on.png)");
-//            }
-//        });
-//
-//    }, function(){
-//
-//        $('#left_btn').stop().animate({width: 100}, {duration:100,
-//            complete: function () {
-//                $('#left_btn').css("background","url(images/trend_off.png)");
-//            }
-//        });
-//    });
-});
-
 
 app.run(function(){
     var tag = document.createElement('script');
@@ -196,7 +165,9 @@ app.service('PlayList', function(){
                 this.index = 0
             }else{
                 // ループじゃない場合
-                if(flag != true) this.index++;
+                if(repeat_flag != true) {
+                    this.index++;
+                }
             }
         }
         this.ready = true;
@@ -208,33 +179,84 @@ app.service('PlayList', function(){
     };
 });
 
-app.controller('controller', function($scope, $location, Tracks, YouTube, PlayList, ArtistInfo, ChartTopArtists, $http) {
+app.config(function($modalProvider) {
+    angular.extend($modalProvider.defaults, {
+        animation: 'am-flip-x',
+        html: true
+    });
+});
+app.config(function($tooltipProvider) {
+    angular.extend($tooltipProvider.defaults, {
+        html: true,
+        animation: 'am-flip-x'
+    });
+});
+app.controller('controller', function($scope, $location, Tracks, YouTube, PlayList, ArtistInfo, ChartTopArtists, $http, $tooltip) {
     $scope.playing = false;
     $scope.title = 'lamusica';
     $scope.number = '';
 
-    $('#form .typeahead').typeahead({
-        name : 'artist',
-        remote : {
-            url: 'http://ws.audioscrobbler.com/2.0/?api_key=6a6281367c3ad09f1b4a7c15dc50675b'
-                + '&method=artist.search&limit=5&artist=%QUERY&format=json',
-            dataType : 'jsonp',
-            template: '<p><strong>{{name}}</strong></p>',
-            filter : function(res){
-                var results = [];
-                if(res.results.artistmatches) {
-                    var artists = res.results.artistmatches.artist;
-                    $.each(artists, function(){
-                        results.push(this.name);
-                    });
-                }
-                return results;
-            }
+    // trend tooltip
+    $scope.trendTooltip = $tooltip(angular.element($('#left_btn')), {title:'急上昇中<br/> or<br/> TOPアーティスト', placement: 'bottom', animation: 'am-fade-and-scale'});
+
+    // tooltip
+    $scope.tooltip = {
+        setnumber: '曲数の設定<br/>デフォルト:20',
+        repeat   : '1曲リピートOFF',
+        artist   : 'アーティスト名を入力',
+        biography: 'アーティストの遍歴と紹介',
+        similar  : '似ているアーティストの紹介',
+        album    : 'アルバムの紹介',
+        checked  : false};
+
+    // How to Use
+    $scope.modal = {
+        "title": "Title",
+        "content": "Hello Modal<br />This is a multiline message!"
+    };
+
+    $scope.button = {
+        "repeat": true
+    };
+    // repeat button
+    $scope.repeatSwitch = function(){
+
+        if($scope.button.repeat == true){
+            $("#repeat_btn").addClass("btn-warning").removeClass("btn-info");
+            $scope.tooltip.repeat = '1曲リピートON';
+            repeat_flag = true;
         }
-    }).on('typeahead:selected typeahead:autocompleted', function (e, datum) {
-            $scope.artist = datum.value;
-            $scope.submit(true);
-        });
+        else{
+            $("#repeat_btn").addClass("btn btn-default").removeClass("btn-warning");
+            $scope.tooltip.repeat = '1曲リピートOFF';
+            repeat_flag = false;
+        }
+    };
+
+    // Artist予測表示
+    $scope.getArtist= function(viewValue) {
+
+        var params = {
+            'artist': viewValue,
+            'format': 'json',
+            'limit': '5',
+            'method': 'artist.search'};
+
+        return $http.get(
+            'http://ws.audioscrobbler.com/2.0/?api_key=6a6281367c3ad09f1b4a7c15dc50675b',
+            {params: params}
+        ).then(function(res) {
+                if(res.data.results.artistmatches) {
+                    var artists = res.data.results.artistmatches;
+                    return artists.artist;
+                }
+            });
+    };
+    // 候補選択後
+    $scope.$on('$typeahead.select', function(e,data){
+        $scope.artist = data;
+        $scope.submit(true);
+    });
 
     $scope.play = function(index, song){
 
@@ -248,7 +270,6 @@ app.controller('controller', function($scope, $location, Tracks, YouTube, PlayLi
             $scope.title = track.name + ' by ' + track.artist.name + ' - lamusica #lamusicafree';
             // params set
             $location.search('song', track.name);
-
             $("#tweetButtonWrapper").html(
                 '<a href="https://twitter.com/share" data-url="' + location.href + '" class="twitter-share-button"  data-text="'+ $scope.title + '" data-lang="en">Tweet</a>'
             );
@@ -281,12 +302,11 @@ app.controller('controller', function($scope, $location, Tracks, YouTube, PlayLi
         }
     };
     $scope.trend_artist();
-
     $scope.submit = function(autoplay, query){
 
         // 一つ前のArtist取得
         $scope.prev_artist = $location.search().q;
-        $scope.artist = query || angular.element('.tt-query').val() || $location.search().q;
+        $scope.artist = query || angular.element('.artist_input').val() || $location.search().q;
 
         if (!$scope.artist || typeof $scope.artist == 'undefined') return;
         if (!$scope.playing) angular.element('#form .typeahead').typeahead('setQuery', $scope.artist);
