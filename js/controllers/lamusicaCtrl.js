@@ -165,7 +165,9 @@ lamusica.controller('controller', function(
         YouTube.play(PlayList.next(index), $scope.play, song);
         var track = PlayList.current_track();
         if(track) {
-            $scope.title = track.name + ' by ' + track.artist.name + ' - lamusica #lamusicafree';
+            $scope.title = "Lamusicaで " +
+                track.name + ' by ' + track.artist.name +
+                ' を聞いています♪ #lamusicafree';
             // params set
             $location.search('song', track.name);
             $("#tweetButtonWrapper").html(
