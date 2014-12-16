@@ -1,0 +1,39 @@
+<div class="aside" tabindex="-1" role="dialog">
+    <div class="aside-dialog">
+        <div class="aside-content">
+            <div class="aside-header" ng-show="title">
+                <button type="button" class="close" ng-click="$hide()">&times;</button>
+                <h4 class="aside-title" ng-bind-html="title"></h4>
+            </div>
+            <div class="aside-body" ng-show="content">
+                <h4>最近聞かれているアーティストリスト</h4>
+                <select class="form-control" ng-model="sortorder" ng-init="sortorder='-date'">
+                    <option value="-date">Recent</option>
+                    <option value="+count">count 少ない順</option>
+                    <option value="-count">count 多い順</option>
+                    <option value="+name">name (A-Z)</option>
+                    <option value="-name">name (Z-A)</option>
+                </select>
+                <ul>
+                    <li ng-repeat="play in plays | limitTo:100| orderBy: sortorder">
+                        <div>
+                            <span style="margin: 3px;">
+                            <a ng-click="recent_plays_artist_play(play.name)">
+                                {{ play.name }}
+                            </a>
+                            </span>
+                            <span style="float: right;">
+                                 {{ play.count }} plays
+                            </span>
+                        </div>
+                        <!--<a href ng-click="play.splice($index, 1)">[x]</a>-->
+                    </li>
+                </ul>
+            </div>
+            <div class="aside-footer">
+                <button type="button" class="btn btn-default" ng-click="$hide()">Close</button>
+                <!--<button type="button" class="btn btn-danger" ng-click="plays_all_remove()">All Remove</button>-->
+            </div>
+        </div>
+    </div>
+</div>

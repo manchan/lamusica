@@ -5,11 +5,12 @@
     <title ng-bind="title">lamusica</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/typeahead.js-bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://mgcrea.github.io/angular-strap/styles/main.min.css">
+    <link rel="stylesheet" href="http://mgcrea.github.io/angular-strap/styles/libraries.min.css">
     <link href="css/app.css" rel="stylesheet">
     <link href="css/layout.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="http://mgcrea.github.io/angular-strap/styles/libraries.min.css">
-    <!--<link rel="stylesheet" href="http://mgcrea.github.io/angular-strap/styles/main.min.css">-->
+
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
             (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -46,10 +47,10 @@
             <p class="jap">LAMUSICA（ラムジカ）は、検索した音楽アーティストの曲をランキング順に、流します。
                 <br/>
                 <a
-                   data-animation="am-fade-and-scale"
-                   data-placement="center"
-                   data-template="template/modal/howtouse.html"
-                   bs-modal="modal">How to Use: 使い方はこちら</a>
+                        data-animation="am-fade-and-scale"
+                        data-placement="center"
+                        data-template="template/modal/howtouse.html"
+                        bs-modal="modal">How to Use: 使い方はこちら</a>
                 <!--<a target="_blank" href="http://yuichi-dev.blogspot.jp/2014/08/la-musicayoutube-player.html">How to Use: 使い方はこちら</a>-->
             </p>
             <p class="center">lamusica is YouTube music player. Having fun!</p>
@@ -72,7 +73,6 @@
                 </form>
             </div>
         </div>
-
         <div id="set-number" class="after_view">
             <input type="text" class="form-control right"
                    placeholder="Set Number"
@@ -85,11 +85,16 @@
                     data-title="{{tooltip.repeat}}" bs-tooltip>
                 <span class="glyphicon glyphicon-repeat"></span>
             </button>
+
+            <button class="btn btn-default"
+                    ng-click="recentPlay()"
+                    data-title="{{tooltip.recent}}" bs-tooltip>
+                <b><i class="fa fa-heart"></i> Recent</b>
+            </button>
         </div>
         <br />
         <br />
         <!--<hr />-->
-
         <div class="row">
             <div id="list">
                 <div id="list-intro">
@@ -107,7 +112,6 @@
                 <div id="player"></div>
             </div>
         </div>
-
         <br/>
         <div class="row after_view">
             <div class="col-md-6">
@@ -129,7 +133,6 @@
                 </div>
             </div>
         </div>
-
         <!--  Amazon Link  -->
         <div class="row after_view">
             <div class="col-md-12">
@@ -154,6 +157,7 @@
         </span>
             <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
         </div>
+
 
         <!--FB Like-->
         <div id="footer">
@@ -209,13 +213,23 @@ window._fbq.push(['track', '6019086384215', {'value':'0.00','currency':'JPY'}]);
 <script src="js/jquery.js"></script>
 <script src="js/typeahead.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script src="http://code.angularjs.org/1.3.1/angular.min.js" data-semver="1.3.1"></script>
-<script src="http://code.angularjs.org/1.3.1/angular-animate.min.js" data-semver="1.3.1"></script>
-<script src="http://code.angularjs.org/1.3.1/angular-sanitize.min.js" data-semver="1.3.1"></script>
+<!-- Angular -->
+<script src="http://code.angularjs.org/1.3.2/angular.min.js" data-semver="1.3.2"></script>
+<script src="http://code.angularjs.org/1.3.2/angular-animate.min.js" data-semver="1.3.2"></script>
+<script src="http://code.angularjs.org/1.3.2/angular-sanitize.min.js" data-semver="1.3.2"></script>
+<script src="http://code.angularjs.org/1.3.2/angular-route.min.js" data-semver="1.3.2"></script>
+<!-- AngularStrap -->
 <script src="http://mgcrea.github.io/angular-strap/dist/angular-strap.js" data-semver="v2.1.4"></script>
 <script src="http://mgcrea.github.io/angular-strap/dist/angular-strap.tpl.js" data-semver="v2.1.4"></script>
-<script src="js/angular-resource.min.js"></script>
-<script src="js/app.js"></script>
+<!-- Firebase -->
+<script src="https://cdn.firebase.com/js/client/2.0.4/firebase.js"></script>
+<!-- AngularFire -->
+<script src="https://cdn.firebase.com/libs/angularfire/0.9.0/angularfire.min.js"></script>
+
 <script src="js/underscore.js"></script>
+<script src="js/app.js"></script>
+<script src="js/factories.js"></script>
+<script src="js/controllers/lamusicaCtrl.js"></script>
+<script src="js/youtube-resize.js"></script>
 </body>
 </html>
