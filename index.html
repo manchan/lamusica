@@ -34,7 +34,7 @@
     <header class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="banner">
         <div class="container">
             <div class="navbar-header">
-                <button class="navbar-toggle" type="button" data-template="template/aside/trend.html" data-animation="am-fade-and-slide-left" data-placement="left" title="Menu" data-container="body" bs-aside="">
+                <button class="navbar-toggle" type="button" data-template="template/aside/menu.html" data-animation="am-fade-and-slide-left" data-placement="left" title="Menu" data-container="body" bs-aside>
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -45,13 +45,18 @@
             <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a data-template="template/aside/trend.html" data-animation="am-fade-and-slide-left" data-placement="left" title="Menu" data-container="body" bs-aside>
-                            <b><i class="fa fa-headphones"></i> Trend</b>
+                        <a ng-click="modalHow()">
+                            <b><i class="fa fa-cogs"></i> HOW</b>
+                        </a>
+                    </li>
+                    <li>
+                        <a ng-click="asideTrend()">
+                            <b><i class="fa fa-headphones"></i> TREND</b>
                         </a>
                     </li>
                     <li>
                         <a ng-click="recentPlay()">
-                            <b><i class="fa fa-heart"></i> Recent</b>
+                            <b><i class="fa fa-heart"></i> RECENT</b>
                         </a>
                     </li>
                 </ul>
@@ -61,33 +66,12 @@
 </div>
 
 <div class="container">
-    <!--<div class="left_side col-md-2 hidden-sm hidden-xs">-->
-    <!--<a id="left_btn"-->
-    <!--ng-click="trend_artist()" data-title="{{trendTooltip.title}}" bs-tooltip>-->
-    <!--<b><i class="fa fa-headphones"></i> Trend</b>-->
-    <!--</a>-->
-    <!--<div class="l_col_fix sidebar-nav affix" role="complementary" style="display: none;">-->
-    <!--<ul>-->
-    <!--<li ng-repeat="artists in top_artists" class="artist_img">-->
-    <!--<a class="clearfix" ng-click="similar(artists.name)" ng-class="active_class($index)">-->
-    <!--<img ng-src="{{ artists.image[1]['#text'] }}" class="pull-left trend_img">-->
-    <!--<br/>-->
-    <!--<p class="pull-left trend_text" style="position: absolute;">{{ artists.name }}</p>-->
-    <!--</a>-->
-    <!--</li>-->
-    <!--</ul>-->
-    <!--</div>-->
-    <!--</div>-->
     <div class="main">
         <div id="header" class="center">
             <h1><a href="http://manchan.github.io/lamusica/" id="top_title"><img src="images/lamusica.jpg" alt="LAMUSICA" /></a></h1>
             <p class="explain">LAMUSICA（ラムジカ）は、検索した音楽アーティストの曲をランキング順に、流します。
                 <br/>
-                <a
-                        data-animation="am-fade-and-scale"
-                        data-placement="center"
-                        data-template="template/modal/howtouse.html"
-                        bs-modal="modal">How to Use: 使い方はこちら</a>
+                <a class="explain" ng-click="modalHow()">How to Use: 使い方はこちら</a>
                 <!--<a target="_blank" href="http://yuichi-dev.blogspot.jp/2014/08/la-musicayoutube-player.html">How to Use: 使い方はこちら</a>-->
             </p>
             <p class="center">lamusica is YouTube music player. Having fun!</p>
@@ -123,12 +107,6 @@
                     data-title="{{tooltip.repeat}}" bs-tooltip>
                 <span class="glyphicon glyphicon-repeat"></span>
             </button>
-
-            <button class="btn btn-default"
-                    ng-click="recentPlay()"
-                    data-title="{{tooltip.recent}}" bs-tooltip>
-                <b><i class="fa fa-heart"></i> Recent</b>
-            </button>
         </div>
         <br />
         <br />
@@ -139,7 +117,7 @@
                     <!--<p><b>lamusica</b> is YouTube music player</p>-->
                     <!--<p>Having fun!</p>-->
                 </div>
-                <div class="list-item" ng-repeat="track in tracks">
+                <div class="list-item" ng-repeat="track in tracks" ng-cloak>
                     <a class="clearfix" ng-click="click($index)" ng-class="active_class($index)">
                         <img ng-src="{{ track.image[1]['#text'] }}" class="pull-left">
                         <b class="pull-left">{{ track.name }}</b>
@@ -248,6 +226,9 @@ window._fbq.push(['track', '6019086384215', {'value':'0.00','currency':'JPY'}]);
 <!--<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>-->
 <!--<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>-->
 <![endif]-->
+
+<!-- Spin.js -->
+<script src="js/spin.min.js"></script>
 <script src="js/jquery.js"></script>
 <script src="js/typeahead.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
@@ -268,6 +249,7 @@ window._fbq.push(['track', '6019086384215', {'value':'0.00','currency':'JPY'}]);
 <script src="js/app.js"></script>
 <script src="js/factories.js"></script>
 <script src="js/controllers/lamusicaCtrl.js"></script>
+<script src="js/directives/loading.js"></script>
 <script src="js/youtube-resize.js"></script>
 </body>
 </html>

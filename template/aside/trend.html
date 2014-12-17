@@ -6,7 +6,14 @@
                 <h4 class="aside-title" ng-bind-html="title"></h4>
             </div>
             <div class="aside-body">
-                <h4><b><i class="fa fa-headphones"></i> Trend</b></h4>
+                <h4><b><i class="fa fa-headphones"></i> 急上昇中<br/> or<br/> TOPアーティスト</b></h4>
+                <button class="btn btn-default" ng-click="trend_artist()">
+                    <b><i class="fa fa-refresh"></i></b>
+                </button>
+                <!-- Loading -->
+                <div loading-spinner="viewLoading">
+                    <!-- actual view content goes here. -->
+                </div>
                 <ul>
                     <li ng-repeat="artists in top_artists" class="artist_img">
                         <a class="clearfix" ng-click="similar(artists.name)" ng-class="active_class($index)">

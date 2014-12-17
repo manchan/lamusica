@@ -1,0 +1,30 @@
+<div class="aside" tabindex="-1" role="dialog">
+    <div class="aside-dialog">
+        <div class="aside-content">
+            <div class="aside-header" ng-show="title">
+                <button type="button" class="close" ng-click="$hide()">&times;</button>
+                <h4 class="aside-title" ng-bind-html="title"></h4>
+            </div>
+            <div class="aside-body">
+                <h4>
+                    <b><a ng-click="modalHow($hide())">
+                        <i class="fa fa-cogs"></i> How</a>
+                    </b>
+                </h4>
+                <h4>
+                    <b><a ng-click="asideTrend($hide())">
+                        <i class="fa fa-headphones"></i> Trend</a>
+                    </b>
+                </h4>
+                <h4>
+                    <b><a ng-click="recentPlay($hide())">
+                        <i class="fa fa-heart"></i> Recent Play List</a>
+                    </b>
+                </h4>
+            </div>
+            <div class="aside-footer">
+                <button type="button" class="btn btn-default" ng-click="$hide()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -120,7 +120,6 @@ lamusica.factory('Tooltip', function($tooltip) {
  */
 lamusica.factory('Aside', function($scope, $aside) {
 
-
     return {
         getRecentPlay : function() {
             // Show a basic aside from a controller

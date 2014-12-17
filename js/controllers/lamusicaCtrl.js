@@ -11,7 +11,7 @@ var left_disp = false;
  */
 lamusica.controller('controller', function(
     $scope, $location, Tracks, YouTube, PlayList, ArtistInfo, ChartTopArtists,
-    $http, $aside, $firebase, $q, Tooltip) {
+    $http, $modal, $aside, Tooltip, $q,  $firebase) {
 
     $scope.playing = false;
     $scope.plays = [];
@@ -89,10 +89,10 @@ lamusica.controller('controller', function(
         });
     };
 
-    // Show a basic aside from a controller
+    // Show a Recent aside from a controller
     var recentPlay = $aside({
         title: '<b><i class="fa fa-heart"></i> Recent Play List</b>',
-        content: 'this is content',
+        content: '',
         scope: $scope,
         show: false,
         template: "template/aside/recentplay.html"
@@ -103,10 +103,41 @@ lamusica.controller('controller', function(
         });
     };
 
+    // Show a Trend aside from a controller
+    var asideTrend = $aside({
+        title: '<b><i class="fa fa-headphones"></i> Trend</b>',
+        content: '',
+        animation: 'am-fade-and-slide-left',
+        placement: 'left',
+        scope: $scope,
+        show: false,
+        template: "template/aside/trend.html"
+    });
+    $scope.asideTrend = function() {
+        asideTrend.$promise.then(function() {
+            asideTrend.show();
+        });
+    };
+
     // trend tooltip
 //    $scope.trendTooltip = Tooltip.getTrend();
     // tooltip
     $scope.tooltip = Tooltip.getDefaults();
+
+    // Show a How To Modal from a controller
+    var modalHow = $modal({
+        title: 'modal title',
+        content: 'this is content',
+        animation: 'am-flip-x',
+        placement: 'center',
+        show: false,
+        template: "template/modal/howtouse.html"
+    });
+    $scope.modalHow = function() {
+        modalHow.$promise.then(function() {
+            modalHow.show();
+        });
+    };
 
     // How to Use
     $scope.modal = {
@@ -182,27 +213,23 @@ lamusica.controller('controller', function(
 
     $scope.trend_artist = function(){
 
+        $scope.viewLoading = true;
         $scope.top_artists = [];
-        left_disp = !left_disp;
-        if(left_disp == true){
+        ChartTopArtists.get('', function(artists){
+            angular.forEach(artists, function(row, i){
+                this.push(row);
+            }, $scope.top_artists);
 
-            ChartTopArtists.get('', function(artists){
-                angular.forEach(artists, function(row, i){
-                    this.push(row);
-                }, $scope.top_artists);
-
-                // ランダム表示
-                $scope.top_artists = $scope.top_artists.map(function(a){return {weight:Math.random(), value:a}})
-                    .sort(function(a, b){return a.weight - b.weight})
-                    .map(function(a){return a.value});
-            });
+            // ランダム表示
+            $scope.top_artists = $scope.top_artists.map(function(a){return {weight:Math.random(), value:a}})
+                .sort(function(a, b){return a.weight - b.weight})
+                .map(function(a){return a.value});
 
             $(".l_col_fix").animate( { opacity: 'show'}, { duration: 1000, easing: 'swing' } );
-        }
-        else{
-            $(".l_col_fix").animate( { opacity: 'hide'}, { duration: 2000, easing: 'swing' } );
-        }
+            $scope.viewLoading = false;
+        });
     };
+
     $scope.trend_artist();
     $scope.recent_plays_artist_play = function(name){
         angular.element('.artist_input').val(name);
