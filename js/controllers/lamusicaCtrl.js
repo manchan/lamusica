@@ -83,10 +83,10 @@ lamusica.controller('controller', function(
     };
 
     $scope.plays_all_remove = function(){
-            angular.forEach($scope.plays, function(play, i){
-                    var row = $scope.plays.$getRecord($scope.plays[i].$id);
-                    $scope.plays.$remove(row);
-            });
+        angular.forEach($scope.plays, function(play, i){
+            var row = $scope.plays.$getRecord($scope.plays[i].$id);
+            $scope.plays.$remove(row);
+        });
     };
 
     // Show a basic aside from a controller
@@ -144,7 +144,8 @@ lamusica.controller('controller', function(
             'http://ws.audioscrobbler.com/2.0/?api_key=6a6281367c3ad09f1b4a7c15dc50675b',
             {params: params}
         ).then(function(res) {
-                if(res.data.results.artistmatches) {
+
+                if(typeof( res.data.results) != 'undefined' && res.data.results.artistmatches) {
                     var artists = res.data.results.artistmatches;
                     return artists.artist;
                 }

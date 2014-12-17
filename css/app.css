@@ -6,6 +6,7 @@
 
 body {
     background-color: black;
+    padding-top: 0px;
 }
 p {
     color: white;
@@ -45,7 +46,7 @@ select {
     margin: 15px 0px 15px 0px;
 }
 
-iframe { width: 100%; margin: 0 0 20px 0; }
+iframe { width: 100%; margin: 0 auto}
 
 h1 {
     font-weight:bold;
@@ -71,14 +72,14 @@ a:hover{
     text-align:center;
 }
 #form {
-    width:450px;
+    /*width:450px;*/
     margin:0 auto;
     margin-top: 10px;
     float:none;
 }
 #form .form-control {
     display:inline;
-    width:330px;
+    width:75%;
     padding-left:10px;
 }
 #form .tt-hint {
@@ -86,12 +87,12 @@ a:hover{
 }
 #form button {
     margin:0 0 0 5px;
-    width:80px;
+    /*width:80px;*/
 }
 #social-buttons {
-    width:500px;
+    /*width:500px;*/
     margin:0 auto;
-    padding-left:20px;
+    /*padding-left:20px;*/
 }
 #set-number {
     width:90px;
@@ -183,7 +184,7 @@ address {
 li.similar_link{
     float: left;
     margin-bottom:10px;
-    width: 180px;
+    width: 50%;
     height: 90px;
 }
 ul.amz_link {
@@ -205,22 +206,24 @@ ul.amz_link li {
 .left_side{
     float: left;
     width: 10%;
+    min-width: 80px;
     position: fixed;
 }
 .main{
     float: left;
-    margin-left: 20px;
+    /*margin-left: 30px;*/
     width: 90%;
     position:relative;
     left:10%;
-    margin-right: 20px;
+    margin: 0 auto;
+    /*margin-right: 20px;*/
 }
 .clearLeft {
     clear: left;
 }
 #left_btn{
     float: left;
-    width: 70px;
+    min-width: 80px;
     margin-top: 10px;
     margin-left: 5px;
     height: 30px;
@@ -228,6 +231,18 @@ ul.amz_link li {
     /*-webkit-transition: width 1s;*/
     /*transition: width 1s;*/
 }
+
+.trend_img{
+    width: 100%;
+    min-width: 64px;
+    height:64px;
+}
+.trend_text{
+    top: 50px;
+    width: 100%;
+    min-width: 70px;
+}
+
 
 #left_btn:hover{
     opacity: 0.5;
