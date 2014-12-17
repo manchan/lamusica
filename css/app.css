@@ -1,16 +1,118 @@
 @import url(http://fonts.googleapis.com/css?family=Alegreya+Sans:400,700);
 
+/****************************************
+
+          Setting
+
+*****************************************/
+
 .container, h1, h2, h3, h4, h5, h6 {
     font-family: 'Alegreya Sans', sans-serif;
 }
-
 body {
-    background-color: black;
-    padding-top: 0px;
+    background-color: #000000;
+    font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+    /*padding-top: 0px;*/
 }
-p {
-    color: white;
+img {border: 0;}
+ol, ul {
+    list-style: none;
 }
+p {color: white;}
+h1 {
+    font-weight:bold;
+    margin-right: 90px;
+}
+h3 {color: #EB6100;}
+a {
+    color: #EB6100;
+    cursor: pointer;
+}
+a:hover{color: #EB8D00;}
+.container {
+    float: left;
+    width:100%;
+    margin: 0 auto;
+}
+.clearLeft {
+    clear: left;
+}
+
+/****************************************
+
+          Main, Header
+
+*****************************************/
+
+.main{
+    float: left;
+    /*margin-left: 30px;*/
+    width: 90%;
+    position:relative;
+    left:10%;
+    margin: 0 auto;
+    /*margin-right: 20px;*/
+}
+#header {
+    text-align:center;
+    margin-top: 40px;
+    font-size:12px;
+}
+#header h1{
+    text-align:center;
+    margin-bottom:50px;
+}
+
+#header .explain{
+    font-size:14px;
+    padding-bottom:10px;
+    color:#EB6100;
+}
+#header .center{
+    text-align:center;
+    color:#EB6100;
+}
+.bs-docs-nav {
+    border: none;
+    background-color:#000000;
+}
+.bs-docs-nav .navbar-toggle {
+    border: none;
+    background-color:#000000;
+}
+.navbar-toggle:hover {
+    background-color: #ffffff;
+}
+
+/****************************************
+
+          Form
+
+*****************************************/
+
+#form {
+    margin:0 auto;
+    margin-top: 10px;
+    float:none;
+}
+#form .form-control {
+    display:inline;
+    width:75%;
+    padding-left:10px;
+}
+#form .tt-hint {
+    margin:5px 9px;
+}
+#form button {
+    margin:0 0 0 5px;
+    /*width:80px;*/
+}
+
+/****************************************
+
+          Modal
+
+*****************************************/
 .modal-dialog {
     text-align: left;
 }
@@ -30,6 +132,13 @@ p {
 .modal-footer, .aside-footer {
     background-color: #282828;
 }
+
+/****************************************
+
+          Aside
+
+*****************************************/
+
 .aside .aside-dialog .aside-header{
     background-color: #282828;
 }
@@ -42,77 +151,35 @@ p {
 .aside{
     background-color: #282828;
 }
+
 select {
     margin: 15px 0px 15px 0px;
 }
 
-iframe { width: 100%; margin: 0 auto}
+/****************************************
 
-h1 {
-    font-weight:bold;
-    margin-right: 90px;
-}
-h3 {
-    color: #EB6100;
-}
-a {
-    color: #EB6100;
-    cursor: pointer;
-}
-a:hover{
-    color: #EB8D00;
-}
-.container {
-    float: left;
-    margin-bottom:80px;
-    width:100%;
-    margin: 0 auto;
-}
-#header {
-    text-align:center;
-}
-#form {
-    /*width:450px;*/
-    margin:0 auto;
-    margin-top: 10px;
-    float:none;
-}
-#form .form-control {
-    display:inline;
-    width:75%;
-    padding-left:10px;
-}
-#form .tt-hint {
-    margin:5px 9px;
-}
-#form button {
-    margin:0 0 0 5px;
-    /*width:80px;*/
-}
-#social-buttons {
-    /*width:500px;*/
-    margin:0 auto;
-    /*padding-left:20px;*/
+          AfterView Set-number Repeat
+
+*****************************************/
+.after_view {
+    display: none;
 }
 #set-number {
     width:90px;
     float: left;
-    /*padding-left:20px;*/
     margin-right:5px;
     text-align: right;
-}
-.after_view {
-    display: none;
 }
 #repeat_btn {
     margin-right:3px;
 }
 
-#content {
-    float:right;
-    width: 60%;
-    margin-right:20px;
-}
+/****************************************
+
+          List
+
+*****************************************/
+
 #list-intro {
     font-family:'YuGothic', 'Yu Gothic', 'Hiragino Kaku Gothic Pro', 'Meiryo', sans-serif;
     font-size:1.2em;
@@ -164,29 +231,46 @@ a:hover{
     background-color:#666;
     border:1px solid #000;
 }
-address {
-    font-style:italic;
+
+/****************************************
+
+          Content （YouTube iFrame）
+
+*****************************************/
+
+#content {
+    float:right;
+    width: 60%;
+    margin-right:20px;
 }
+iframe { width: 100%; margin: 0 auto}
 #player {
-    width:600px;
+    /*width:600px;*/
     height:400px;
     min-width: 125px;
     min-height: 100px;
     background-color:#000;
 }
-.tt-suggestion p{
-    color: gray;
-}
 
-#artist_info{
-    margin-top: 30px;
-}
+/****************************************
+
+          ArtistInfo, Similar
+
+*****************************************/
+
+#artist_info{margin-top: 30px;}
 li.similar_link{
     float: left;
     margin-bottom:10px;
     width: 50%;
     height: 90px;
 }
+
+/****************************************
+
+          Amazon
+
+*****************************************/
 ul.amz_link {
     margin: 0;
     padding: 0;
@@ -203,23 +287,16 @@ ul.amz_link li {
     height: 240px;
     overflow: auto;
 }
+/****************************************
+
+          Trend Artist
+
+*****************************************/
 .left_side{
     float: left;
     width: 10%;
     min-width: 80px;
     position: fixed;
-}
-.main{
-    float: left;
-    /*margin-left: 30px;*/
-    width: 90%;
-    position:relative;
-    left:10%;
-    margin: 0 auto;
-    /*margin-right: 20px;*/
-}
-.clearLeft {
-    clear: left;
 }
 #left_btn{
     float: left;
@@ -231,10 +308,12 @@ ul.amz_link li {
     /*-webkit-transition: width 1s;*/
     /*transition: width 1s;*/
 }
-
+#left_btn:hover{
+    opacity: 0.5;
+    /*background: url("../images/trend_on.png");*/
+}
 .trend_img{
-    width: 100%;
-    min-width: 64px;
+    width: 64px;
     height:64px;
 }
 .trend_text{
@@ -242,44 +321,29 @@ ul.amz_link li {
     width: 100%;
     min-width: 70px;
 }
-
-
-#left_btn:hover{
-    opacity: 0.5;
-    /*background: url("../images/trend_on.png");*/
-}
-.l_col_fix {
-    float: left;
-    margin-top: 40px;
-}
 .artist_img {
     position: relative;
     margin-top:10px;
     border-radius: 20px;
     -webkit-border-radius: 20px;
     -moz-border-radius: 20px;
-    /*background-color: #319dd0;*/
     -moz-transition: all 1s linear;
     -ms-transition: all 1s linear;
     -o-transition: all 1s linear;
     -webkit-transition: all 1s linear;
     transition: all 1s linear;
 }
-
 .artist_img img{
     border-radius: 20px;
     -webkit-border-radius: 20px;
     -moz-border-radius: 20px;
-
     -moz-transition: -moz-transform 0.5s linear;
     -webkit-transition: -webkit-transform 0.5s linear;
     -o-transition: -o-transform 0.5s linear;
     -ms-transition: -ms-transform 0.5s linear;
     transition: transform 0.5s linear;
-
     opacity: 1;
 }
-
 .artist_img img:hover{
     /*background-color: #319dd0;*/
     -webkit-transform: scale(1.2);
@@ -288,7 +352,6 @@ ul.amz_link li {
     -ms-transform: scale(1.2);
     transform: scale(1.2);
 }
-
 img:hover,
 .artist_img:hover img {
     opacity: 0.5;
@@ -299,15 +362,12 @@ img:hover,
     transition: all 0.5s linear;
 }
 
-/*body {*/
-/*background-color: #4fb4e8;*/
-/*background: -webkit-linear-gradient(left, #e47d7d 0%, #c195d3 48%, #4fb4e8 100%);*/
-/*background: -moz-linear-gradient(left, #e47d7d 0%, #c195d3 48%, #4fb4e8 100%);*/
-/*background: -ms-linear-gradient(left, #e47d7d 0%, #c195d3 48%, #4fb4e8 100%);*/
-/*background: -o-linear-gradient(left, #e47d7d 0%, #c195d3 48%, #4fb4e8 100%);*/
-/*background: linear-gradient(to right, #e47d7d 0%, #c195d3 48%, #4fb4e8 100%);*/
-/*filter: progid:DXImageTransform.Microsoft.gradient(GradientType=1, StartColorStr='#e47d7d', EndColorStr='#4fb4e8'); }*/
-/*}*/
+/****************************************
+
+          Typeahead Dropdown
+
+*****************************************/
+.tt-suggestion p{color: gray;}
 
 .dropdown-menu > li > a:hover,
 .dropdown-menu > li > a:focus {
@@ -326,3 +386,40 @@ img:hover,
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#EB6100', endColorstr='#000000', GradientType=0);
     background-repeat: repeat-x;
 }
+
+/****************************************
+
+          footer
+
+*****************************************/
+
+address {font-style:italic;}
+
+#social-buttons {
+    margin:0 auto;
+}
+#footer{
+    font-size:10px;
+    margin-top:80px;
+}
+#footer p{
+    text-align:center;
+    color:#EB6100;
+    margin: 0 auto;
+}
+
+/****************************************
+
+          Gradation
+
+*****************************************/
+
+/*body {*/
+/*background-color: #4fb4e8;*/
+/*background: -webkit-linear-gradient(left, #e47d7d 0%, #c195d3 48%, #4fb4e8 100%);*/
+/*background: -moz-linear-gradient(left, #e47d7d 0%, #c195d3 48%, #4fb4e8 100%);*/
+/*background: -ms-linear-gradient(left, #e47d7d 0%, #c195d3 48%, #4fb4e8 100%);*/
+/*background: -o-linear-gradient(left, #e47d7d 0%, #c195d3 48%, #4fb4e8 100%);*/
+/*background: linear-gradient(to right, #e47d7d 0%, #c195d3 48%, #4fb4e8 100%);*/
+/*filter: progid:DXImageTransform.Microsoft.gradient(GradientType=1, StartColorStr='#e47d7d', EndColorStr='#4fb4e8'); }*/
+/*}*/

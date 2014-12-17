@@ -25,7 +25,6 @@ lamusica.factory('Tracks', function($http) {
     };
 });
 
-
 /**
  * アーティスト情報取得
  */
@@ -92,15 +91,15 @@ lamusica.factory('ChartTopArtists', function($http) {
 lamusica.factory('Tooltip', function($tooltip) {
 
     return {
-        getTrend : function() {
-            return $tooltip(
-                angular.element($('#left_btn')),
-                {
-                    title:'急上昇中<br/> or<br/> TOPアーティスト',
-                    placement: 'bottom',
-                    animation: 'am-fade-and-scale'
-                });
-        },
+//        getTrend : function() {
+//            return $tooltip(
+//                angular.element($('#left_btn')),
+//                {
+//                    title:'急上昇中<br/> or<br/> TOPアーティスト',
+//                    placement: 'bottom',
+//                    animation: 'am-fade-and-scale'
+//                });
+//        },
 
         getDefaults : function(){
             return {
@@ -125,7 +124,8 @@ lamusica.factory('Aside', function($scope, $aside) {
     return {
         getRecentPlay : function() {
             // Show a basic aside from a controller
-            var recentPlay = $aside({title: 'Recent Play List',
+            var recentPlay = $aside({
+                title: '<b><i class="fa fa-heart"></i> Recent Play List</b>',
                 content: 'this is content',
                 scope: $scope,
                 show: false,

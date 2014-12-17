@@ -14,7 +14,6 @@
     <link rel="stylesheet" href="http://mgcrea.github.io/angular-strap/styles/main.min.css">
     <link rel="stylesheet" href="http://mgcrea.github.io/angular-strap/styles/libraries.min.css">
     <link href="css/app.css" rel="stylesheet">
-    <link href="css/layout.css" rel="stylesheet" type="text/css" />
 
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -27,36 +26,58 @@
     </script>
 </head>
 <body data-spy="scroll" data-target=".bs-docs-sidebar">
-<div class="container">
-
-    <!--<button class="navbar-toggle" type="button">-->
-        <!--<span class="sr-only">Toggle navigation</span>-->
-        <!--<span class="icon-bar"></span>-->
-        <!--<span class="icon-bar"></span>-->
-        <!--<span class="icon-bar"></span>-->
-    <!--</button>-->
-    <div class="left_side col-md-2 hidden-sm hidden-xs">
-        <a id="left_btn"
-           ng-click="trend_artist()" data-title="{{trendTooltip.title}}" bs-tooltip>
-            <b><i class="fa fa-headphones"></i> Trend</b>
-        </a>
-        <div class="l_col_fix sidebar-nav affix" role="complementary" style="display: none;">
-            <ul>
-                <li ng-repeat="artists in top_artists" class="artist_img">
-                    <a class="clearfix" ng-click="similar(artists.name)" ng-class="active_class($index)">
-                        <img ng-src="{{ artists.image[1]['#text'] }}" class="pull-left trend_img">
-                        <br/>
-                        <p class="pull-left trend_text" style="position: absolute;">{{ artists.name }}</p>
-                    </a>
-                </li>
-            </ul>
+<div>
+    <header class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="banner">
+        <div class="container">
+            <div class="navbar-header">
+                <button class="navbar-toggle" type="button" data-template="template/aside/trend.html" data-animation="am-fade-and-slide-left" data-placement="left" title="Menu" data-container="body" bs-aside="">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="index.html" class="navbar-brand">LAMUSICA</a>
+            </div>
+            <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a data-template="template/aside/trend.html" data-animation="am-fade-and-slide-left" data-placement="left" title="Menu" data-container="body" bs-aside>
+                            <b><i class="fa fa-headphones"></i> Trend</b>
+                        </a>
+                    </li>
+                    <li>
+                        <a ng-click="recentPlay()">
+                            <b><i class="fa fa-heart"></i> Recent</b>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </div>
-    </div>
+    </header>
+</div>
 
+<div class="container">
+    <!--<div class="left_side col-md-2 hidden-sm hidden-xs">-->
+    <!--<a id="left_btn"-->
+    <!--ng-click="trend_artist()" data-title="{{trendTooltip.title}}" bs-tooltip>-->
+    <!--<b><i class="fa fa-headphones"></i> Trend</b>-->
+    <!--</a>-->
+    <!--<div class="l_col_fix sidebar-nav affix" role="complementary" style="display: none;">-->
+    <!--<ul>-->
+    <!--<li ng-repeat="artists in top_artists" class="artist_img">-->
+    <!--<a class="clearfix" ng-click="similar(artists.name)" ng-class="active_class($index)">-->
+    <!--<img ng-src="{{ artists.image[1]['#text'] }}" class="pull-left trend_img">-->
+    <!--<br/>-->
+    <!--<p class="pull-left trend_text" style="position: absolute;">{{ artists.name }}</p>-->
+    <!--</a>-->
+    <!--</li>-->
+    <!--</ul>-->
+    <!--</div>-->
+    <!--</div>-->
     <div class="main">
         <div id="header" class="center">
             <h1><a href="http://manchan.github.io/lamusica/" id="top_title"><img src="images/lamusica.jpg" alt="LAMUSICA" /></a></h1>
-            <p class="jap">LAMUSICA（ラムジカ）は、検索した音楽アーティストの曲をランキング順に、流します。
+            <p class="explain">LAMUSICA（ラムジカ）は、検索した音楽アーティストの曲をランキング順に、流します。
                 <br/>
                 <a
                         data-animation="am-fade-and-scale"
@@ -159,18 +180,19 @@
         </div>
 
         <!-- Social Buttons -->
-        <div id="social-buttons">
-        <span style="margin-right:4px;">
-            <a href="http://b.hatena.ne.jp/entry/http://manchan.github.io/lamusica/" class="hatena-bookmark-button" data-hatena-bookmark-title="lamusica" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="en" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
-        </span>
-        <span style="margin-right:5px;">
-          <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fmanchan.github.io%2Flamusica%2F&amp;width&amp;layout=button_count&amp;action=like&amp;show_faces=true&amp;share=true&amp;height=21" scrolling="no" frameborder="0" style="border:none; height:21px;width:175px;"  allowTransparency="true"></iframe>
-        </span>
-        <span style="margin-right:4px;" id="tweetButtonWrapper">
-        </span>
-            <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+        <div class="after_view">
+            <div id="social-buttons">
+            <span style="margin-right:4px;">
+                <a href="http://b.hatena.ne.jp/entry/http://manchan.github.io/lamusica/" class="hatena-bookmark-button" data-hatena-bookmark-title="lamusica" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="en" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+            </span>
+            <span style="margin-right:5px;">
+              <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fmanchan.github.io%2Flamusica%2F&amp;width&amp;layout=button_count&amp;action=like&amp;show_faces=true&amp;share=true&amp;height=21" scrolling="no" frameborder="0" style="border:none; height:21px;width:175px;"  allowTransparency="true"></iframe>
+            </span>
+            <span style="margin-right:4px;" id="tweetButtonWrapper">
+            </span>
+                <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+            </div>
         </div>
-
 
         <!--FB Like-->
         <div id="footer">
@@ -199,7 +221,6 @@ window._fbq = window._fbq || [];
 window._fbq.push(['track', '6019086384215', {'value':'0.00','currency':'JPY'}]);
 </script>
 <noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6019086384215&amp;cd[value]=0.00&amp;cd[currency]=JPY&amp;noscript=1" /></noscript>
-
 <script>
     window.fbAsyncInit = function() {
         FB.init({

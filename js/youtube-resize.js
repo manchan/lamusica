@@ -1,9 +1,9 @@
 $(function() {
-
     // When the window is resized
     // (You'll probably want to debounce this)
-    $(window).resize(function() {
+    $(window).resize(function(e) {
 
+        e.preventDefault();
         // Find all YouTube videos
         var $allVideos = $("iframe[src^='https://www.youtube.com']"),
         // The element that is fluid width
@@ -15,7 +15,6 @@ $(function() {
                 .removeAttr('height')
                 .removeAttr('width');
         });
-
         var newWidth = $fluidEl.width();
         // Resize all videos according to their own aspect ratio
         $allVideos.each(function() {
@@ -23,8 +22,6 @@ $(function() {
             $el.width(newWidth).height(newWidth * $el.data('aspectRatio'));
 
         });
-
         // Kick off one resize to fix all videos on page load
     }).resize();
-
 });

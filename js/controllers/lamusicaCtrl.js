@@ -90,7 +90,8 @@ lamusica.controller('controller', function(
     };
 
     // Show a basic aside from a controller
-    var recentPlay = $aside({title: 'Recent Play List',
+    var recentPlay = $aside({
+        title: '<b><i class="fa fa-heart"></i> Recent Play List</b>',
         content: 'this is content',
         scope: $scope,
         show: false,
@@ -103,7 +104,7 @@ lamusica.controller('controller', function(
     };
 
     // trend tooltip
-    $scope.trendTooltip = Tooltip.getTrend();
+//    $scope.trendTooltip = Tooltip.getTrend();
     // tooltip
     $scope.tooltip = Tooltip.getDefaults();
 
