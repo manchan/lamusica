@@ -1,0 +1,36 @@
+<header class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="banner" ng-controller="menuCtrl">
+    <div class="container">
+        <div class="navbar-header">
+            <button class="navbar-toggle" type="button" data-template="template/aside/menu.html" data-animation="am-fade-and-slide-left" data-placement="left" title="Menu" data-container="body" bs-aside>
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="index.html" class="navbar-brand">LAMUSICA</a>
+        </div>
+        <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a ng-click="modalHow()">
+                        <b><i class="fa fa-cogs"></i> HOW</b>
+                    </a>
+                </li>
+                <li>
+                    <a ng-click="asideTrend()">
+                        <b><i class="fa fa-headphones"></i> TREND</b>
+                    </a>
+                </li>
+                <li>
+                    <a ng-click="recentPlay()">
+                        <b><i class="fa fa-heart"></i> RECENT</b>
+                    </a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>

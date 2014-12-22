@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="lamusica" ng-controller="controller">
+<html ng-app="lamusica" ng-controller="mainCtrl">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="http://mgcrea.github.io/angular-strap/styles/libraries.min.css">
     <link href="css/app.css" rel="stylesheet">
 
+    <!-- GoogleAnalytics -->
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
             (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -24,45 +25,14 @@
         ga('require', 'displayfeatures');
         ga('send', 'pageview');
     </script>
+    <!-- Bugsnag -->
     <script
             src="//d2wy8f7a9ursnm.cloudfront.net/bugsnag-2.min.js"
             data-apikey="4229069488cae25a34ea572d09247133">
     </script>
 </head>
 <body data-spy="scroll" data-target=".bs-docs-sidebar">
-<div>
-    <header class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="banner">
-        <div class="container">
-            <div class="navbar-header">
-                <button class="navbar-toggle" type="button" data-template="template/aside/menu.html" data-animation="am-fade-and-slide-left" data-placement="left" title="Menu" data-container="body" bs-aside>
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a href="index.html" class="navbar-brand">LAMUSICA</a>
-            </div>
-            <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a ng-click="modalHow()">
-                            <b><i class="fa fa-cogs"></i> HOW</b>
-                        </a>
-                    </li>
-                    <li>
-                        <a ng-click="asideTrend()">
-                            <b><i class="fa fa-headphones"></i> TREND</b>
-                        </a>
-                    </li>
-                    <li>
-                        <a ng-click="recentPlay()">
-                            <b><i class="fa fa-heart"></i> RECENT</b>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+<div ng-include="'template/header.html'">
 </div>
 
 <div class="container">
@@ -71,12 +41,11 @@
             <h1><a href="http://manchan.github.io/lamusica/" id="top_title"><img src="images/lamusica.jpg" alt="LAMUSICA" /></a></h1>
             <p class="explain">LAMUSICA（ラムジカ）は、検索した音楽アーティストの曲をランキング順に、流します。
                 <br/>
-                <a class="explain" ng-click="modalHow()">How to Use: 使い方はこちら</a>
+                <a class="explain" ng-click="modalHow()" ng-controller="menuCtrl">How to Use: 使い方はこちら</a>
                 <!--<a target="_blank" href="http://yuichi-dev.blogspot.jp/2014/08/la-musicayoutube-player.html">How to Use: 使い方はこちら</a>-->
             </p>
             <p class="center">lamusica is YouTube music player. Having fun!</p>
         </div>
-        <!-- /header -->
         <div class="row">
             <div id="form" class="col-md-5">
                 <form role="form" ng-submit="submit(true)">
@@ -84,11 +53,12 @@
                         <!--<input type="text" class="form-control typeahead"-->
                         <input type="text"
                                class="form-control artist_input"
+                               ng-controller="tooltipCtrl"
                                ng-model="artist"
                                data-animation="am-flip-x"
                                ng-options="artists.name as artists.name for artists in getArtist($viewValue)"
                                placeholder="Enter Artist"
-                               bs-typeahead data-title="{{tooltip.artist}}" bs-tooltip>
+                               bs-typeahead data-title="{{::tooltip.artist}}" bs-tooltip>
                         <button type="submit" class="btn btn-default"><b><i class="fa fa-play-circle"></i> Play</b></button>
                     </div>
                 </form>
@@ -97,27 +67,28 @@
         <div id="set-number" class="after_view">
             <input type="text" class="form-control right"
                    placeholder="Set Number"
-                   ng-model="number" style="text-align: right" id="number" data-title="{{tooltip.setnumber}}" bs-tooltip/>
+                   ng-controller="tooltipCtrl"
+                   ng-model="number" style="text-align: right" id="number" data-title="{{::tooltip.setnumber}}" bs-tooltip/>
         </div>
         <div class="after_view">
             <button type="button"
                     class="btn btn btn-default" id="repeat_btn"
                     ng-click="repeatSwitch()" ng-model="button.repeat"
                     bs-checkbox
-                    data-title="{{tooltip.repeat}}" bs-tooltip>
+                    ng-controller="tooltipCtrl"
+                    data-title="{{::tooltip.repeat}}" bs-tooltip>
                 <span class="glyphicon glyphicon-repeat"></span>
             </button>
         </div>
         <br />
         <br />
-        <!--<hr />-->
         <div class="row">
-            <div id="list">
+            <div id="list" ng-cloak>
                 <div id="list-intro">
                     <!--<p><b>lamusica</b> is YouTube music player</p>-->
                     <!--<p>Having fun!</p>-->
                 </div>
-                <div class="list-item" ng-repeat="track in tracks" ng-cloak>
+                <div class="list-item" ng-repeat="track in tracks">
                     <a class="clearfix" ng-click="click($index)" ng-class="active_class($index)">
                         <img ng-src="{{ track.image[1]['#text'] }}" class="pull-left">
                         <b class="pull-left">{{ track.name }}</b>
@@ -131,13 +102,13 @@
         <br/>
         <div class="row after_view">
             <div class="col-md-6">
-                <h3 data-title="{{tooltip.biography}}" bs-tooltip>Biography</h3>
+                <h3 ng-controller="tooltipCtrl" data-title="{{::tooltip.biography}}" bs-tooltip>Biography</h3>
                 <div>
                     <p id="artist_info"></p>
                 </div>
             </div>
             <div class="col-md-6">
-                <h3 data-title="{{tooltip.similar}}" bs-tooltip>
+                <h3 ng-controller="tooltipCtrl" data-title="{{::tooltip.similar}}" bs-tooltip>
                     Similar</h3>
                 <div ng-repeat="artist in similar_artists">
                     <li class="similar_link">
@@ -152,7 +123,7 @@
         <!--  Amazon Link  -->
         <div class="row after_view">
             <div class="col-md-12">
-                <h3 data-title="{{tooltip.album}}" bs-tooltip>Albums</h3>
+                <h3 ng-controller="tooltipCtrl" data-title="{{::tooltip.album}}" bs-tooltip>Albums</h3>
                 <ul>
                     <li class="err" ng-repeat="error in errors"> {{ error }} </li>
                 </ul>
@@ -176,14 +147,7 @@
             </div>
         </div>
 
-        <!--FB Like-->
-        <div id="footer">
-            <p class="center">
-                <span class="glyphicon glyphicon-copyright-mark"></span>
-                <a href="http://manchan.github.io/">manchan</a>,
-                <b>lamusica</b> using Last.fm Web API, YouTube API, amazon Product Advertising API, jQuery, AngularJS, Twitter Bootstrap and GitHub
-            </p>
-        </div>
+        <div id="footer" ng-include="'template/footer.html'"></div>
     </div>
 </div>
 
@@ -223,8 +187,8 @@ window._fbq.push(['track', '6019086384215', {'value':'0.00','currency':'JPY'}]);
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
-<!--<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>-->
-<!--<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>-->
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 <![endif]-->
 
 <!-- Spin.js -->
@@ -248,7 +212,11 @@ window._fbq.push(['track', '6019086384215', {'value':'0.00','currency':'JPY'}]);
 <script src="js/underscore.js"></script>
 <script src="js/app.js"></script>
 <script src="js/factories.js"></script>
-<script src="js/controllers/lamusicaCtrl.js"></script>
+<script src="js/controllers/mainCtrl.js"></script>
+<script src="js/controllers/trendCtrl.js"></script>
+<script src="js/controllers/recentPlayCtrl.js"></script>
+<script src="js/controllers/menuCtrl.js"></script>
+<script src="js/controllers/tooltipCtrl.js"></script>
 <script src="js/directives/loading.js"></script>
 <script src="js/youtube-resize.js"></script>
 </body>
