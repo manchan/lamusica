@@ -18,7 +18,7 @@
                     <li ng-repeat="play in plays | limitTo:100| orderBy: sortorder">
                         <div>
                             <span style="margin: 3px;">
-                            <a ng-click="recent_plays_artist_play(play.name)">
+                            <a ng-click="recent_plays_artist_play(play.name);$hide();">
                                 {{ play.name }}
                             </a>
                             </span>

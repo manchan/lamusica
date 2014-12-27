@@ -16,7 +16,7 @@
                 </div>
                 <ul>
                     <li ng-repeat="artists in top_artists" class="artist_img">
-                        <a class="clearfix" ng-click="$parent.similar(artists.name)" ng-class="active_class($index)">
+                        <a class="clearfix" ng-click="$parent.similar(artists.name);$hide();" ng-class="active_class($index)">
                             <img ng-src="{{ artists.image[1]['#text'] }}" class="pull-left trend_img">
                             <br/>
                             <p class="pull-left trend_text" style="position: absolute;">{{ artists.name }}</p>
