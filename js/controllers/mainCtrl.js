@@ -8,8 +8,8 @@ var left_disp = false;
  * The main controller for the app. The mainCtrl:
  */
 lamusica.controller('mainCtrl', function(
-    $scope, $location, Tracks, YouTube, PlayList, ArtistInfo,
-    $http, $q, $controller) {
+    $rootScope, $scope, $location, Tracks, YouTube, PlayList, ArtistInfo,
+    $http, $q) {
 
     $scope.playing = false;
     $scope.title = 'lamusica';
@@ -130,10 +130,13 @@ lamusica.controller('mainCtrl', function(
         // はじめ非表示を表示状態に
         $('.after_view').css("display", "block");
 
-        // Controller 継承
-        $controller('recentPlayCtrl', {$scope: $scope});
         // TODO 履歴カウントUP
-        $scope.plays_add();
+        // rootScope使用の場合
+        $rootScope.plays_add();
+        // Controller 継承の場合
+//        $controller('recentPlayCtrl', {$scope: $scope});
+//        $scope.plays_add();
+        // $broadcast $onの場合
 //        $rootScope.$broadcast('playsAdd');
     };
     $scope.click = function(index){ $scope.play(index); };

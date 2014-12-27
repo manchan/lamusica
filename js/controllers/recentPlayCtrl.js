@@ -7,7 +7,7 @@
  * - exposes the model to the template and provides event handlers
  */
 lamusica.controller('recentPlayCtrl', function(
-    $scope, $q, $firebase) {
+    $rootScope, $scope, $q, $firebase) {
 
     $scope.plays = [];
     // Firebase
@@ -47,7 +47,7 @@ lamusica.controller('recentPlayCtrl', function(
 //        });
 //    }, true);
 
-    $scope.plays_add = function(){
+    $rootScope.plays_add = function(){
 
         // firebaseから再度ロード
         $scope.fire_reload().then(function(){
