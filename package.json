@@ -1,0 +1,25 @@
+{
+  "name": "lamusica",
+  "version": "1.0.0",
+  "description": "Lamusica ========",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/manchan/lamusica.git"
+  },
+  "author": "Yuichi Matsuoka",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/manchan/lamusica/issues"
+  },
+  "homepage": "https://github.com/manchan/lamusica",
+  "devDependencies": {
+    "gulp": "^3.8.10",
+    "gulp-csso": "^0.2.9",
+    "gulp-less": "^2.0.1",
+    "gulp-rename": "^1.2.0"
+  }
+}
