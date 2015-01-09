@@ -82,4 +82,50 @@ lamusica.controller('recentPlayCtrl', function(
             $scope.plays.$remove(row);
         });
     };
+
+    $scope.clickPlay = function(artist_name){
+        $scope.onclickArtist(artist_name);
+        $scope.$hide();
+    }
 });
+
+// React generate virtual DOM faster than ng-repeat
+lamusica.factory( "RecentPlay", function( $filter ) {
+    return React.createClass( {
+        propTypes: {
+            plays : React.PropTypes.array.isRequired,
+            onplay: React.PropTypes.func.isRequired,
+            sorter: React.PropTypes.string.isRequired
+        },
+        render: function() {
+
+            var sorter = this.props.sorter;
+            var playExec = this.props.onplay;
+            var clickHandler = function(ev){
+                console.log("Still in reactJs");
+                // TODO
+                playExec($(ev.target).text());
+            };
+
+            if(typeof this.props.plays == "undefined" ) {
+                return React.DOM.ul( null, []);
+            }
+
+            // ※Angular filtering...
+            var list = $filter('orderBy')(this.props.plays, sorter);
+
+            return React.DOM.ul( null, list.map( function( col, i ) {
+
+                var playsTxt = React.DOM.span( { style : { float:'right' }}, col.count + " plays" );
+                var nameA    = React.DOM.a( { onClick  : clickHandler },  col.name);
+                var nameTxt  = React.DOM.span( { style : { margin:'3px' } }, nameA);
+                var div      = React.DOM.div( { key: i},  [nameTxt, playsTxt]);
+                return React.DOM.li( { key: i},  [div]);
+            } ) );
+        }
+    } );
+} );
+
+lamusica.directive( 'recentPlay', function( reactDirective ) {
+    return reactDirective( 'RecentPlay' );
+} );

@@ -8,12 +8,11 @@ var left_disp = false;
  * The main controller for the app. The mainCtrl:
  */
 lamusica.controller('mainCtrl', function(
-    $rootScope, $scope, $controller, $location, Tracks, YouTube, PlayList, ArtistInfo,
+    $rootScope, $scope, $controller, $location, Tracks, YouTube, PlayList, ArtistInfo,ChartTopArtists,
     $http, $q) {
 
     $scope.playing = false;
     $scope.title = 'lamusica';
-    $scope.number = '';
 
     // Artist予測表示
     $scope.getArtist= function(viewValue) {
@@ -60,16 +59,10 @@ lamusica.controller('mainCtrl', function(
             $scope.playing = true;
         }
     };
-
-    $scope.recent_plays_artist_play = function(name){
+    $scope.onclickArtist = function(name){
         angular.element('.artist_input').val(name);
         $scope.submit(true, name);
     };
-    $scope.similar = function(name){
-        angular.element('.artist_input').val(name);
-        $scope.submit(true, name);
-    };
-
     $scope.submit = function(autoplay, query){
 
         // 一つ前のArtist取得

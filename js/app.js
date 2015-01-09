@@ -9,7 +9,7 @@
  * @type {angular.Module}
  */
 var lamusica = angular.module('lamusica',
-    ['ng', 'ngAnimate', 'mgcrea.ngStrap', 'ngRoute', 'firebase']);
+    ['ng', 'ngAnimate', 'mgcrea.ngStrap', 'ngRoute', 'firebase', 'react']);
 
 lamusica.run(function(){
     var tag = document.createElement('script');

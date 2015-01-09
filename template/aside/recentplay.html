@@ -14,20 +14,23 @@
                     <option value="+name">name (A-Z)</option>
                     <option value="-name">name (Z-A)</option>
                 </select>
-                <ul>
-                    <li ng-repeat="play in plays | limitTo:100| orderBy: sortorder">
-                        <div>
-                            <span style="margin: 3px;">
-                            <a ng-click="recent_plays_artist_play(play.name);$hide();">
-                                {{ play.name }}
-                            </a>
-                            </span>
-                            <span style="float: right;">
-                                 {{ play.count }} plays
-                            </span>
-                        </div>
-                    </li>
-                </ul>
+
+                <!-- React generate virtual DOM faster than ng-repeat -->
+                <recent-play plays="plays" onplay="clickPlay" sorter="sortorder"/>
+                <!--<ul>-->
+                    <!--<li ng-repeat="play in plays | limitTo:100| orderBy: sortorder">-->
+                        <!--<div>-->
+                            <!--<span style="margin: 3px;">-->
+                            <!--<a ng-click="onclickArtist(play.name);$hide();">-->
+                                <!--{{ play.name }}-->
+                            <!--</a>-->
+                            <!--</span>-->
+                            <!--<span style="float: right;">-->
+                                 <!--{{ play.count }} plays-->
+                            <!--</span>-->
+                        <!--</div>-->
+                    <!--</li>-->
+                <!--</ul>-->
             </div>
             <div class="aside-footer">
                 <button type="button" class="btn btn-default" ng-click="$hide()">Close</button>

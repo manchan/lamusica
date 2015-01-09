@@ -37,10 +37,10 @@
         ga('send', 'pageview');
     </script>
     <!-- Bugsnag -->
-    <script
-            src="//d2wy8f7a9ursnm.cloudfront.net/bugsnag-2.min.js"
-            data-apikey="4229069488cae25a34ea572d09247133">
-    </script>
+    <!--<script-->
+    <!--src="//d2wy8f7a9ursnm.cloudfront.net/bugsnag-2.min.js"-->
+    <!--data-apikey="4229069488cae25a34ea572d09247133">-->
+    <!--</script>-->
 </head>
 <body data-spy="scroll" data-target=".bs-docs-sidebar">
 <div ng-include="'template/header.html'">
@@ -123,7 +123,7 @@
                     Similar</h3>
                 <div ng-repeat="artist in similar_artists">
                     <li class="similar_link">
-                        <a class="clearfix" ng-click="similar(artist.name)" ng-class="active_class($index)">
+                        <a class="clearfix" ng-click="onclickArtist(artist.name)" ng-class="active_class($index)">
                             <img ng-src="{{ artist.image[1]['#text'] }}" class="pull-left">
                             <b class="pull-left">{{ artist.name }}</b>
                         </a>
@@ -219,6 +219,13 @@ window._fbq.push(['track', '6019086384215', {'value':'0.00','currency':'JPY'}]);
 <script src="https://cdn.firebase.com/js/client/2.0.4/firebase.js"></script>
 <!-- AngularFire -->
 <script src="https://cdn.firebase.com/libs/angularfire/0.9.0/angularfire.min.js"></script>
+
+<!-- React -->
+<script src="bower_components/react/react.js"></script>
+<!-- JSX -->
+<script src="bower_components/react/JSXTransformer.js"></script>
+<!-- ngReact -->
+<script src="bower_components/ngReact/ngReact.min.js"></script>
 
 <script src="js/underscore.js"></script>
 <script src="js/app.js"></script>

@@ -7,22 +7,27 @@
             </div>
             <div class="aside-body">
                 <h4><b><i class="fa fa-headphones"></i> 急上昇中<br/> or<br/> TOPアーティスト</b></h4>
-                <button class="btn btn-default" ng-click="trend_artist()">
+                <button class="btn btn-default" ng-click="refresh();">
                     <b><i class="fa fa-refresh"></i></b>
                 </button>
                 <!-- Loading -->
                 <div loading-spinner="viewLoading">
                     <!-- actual view content goes here. -->
                 </div>
-                <ul>
-                    <li ng-repeat="artists in top_artists" class="artist_img">
-                        <a class="clearfix" ng-click="$parent.similar(artists.name);$hide();" ng-class="active_class($index)">
-                            <img ng-src="{{ artists.image[1]['#text'] }}" class="pull-left trend_img">
-                            <br/>
-                            <p class="pull-left trend_text" style="position: absolute;">{{ artists.name }}</p>
-                        </a>
-                    </li>
-                </ul>
+                <div>
+                    <!-- React generate virtual DOM faster than ng-repeat -->
+                    <trend-artist trends="trends" play="clickPlay"/>
+                </div>
+                <!--<div><react-component name="TrendArtist" props="trends" test="testClick"/></div>-->
+                <!--<ul>-->
+                    <!--<li ng-repeat="artists in top_artists" class="artist_img">-->
+                        <!--<a class="clearfix" ng-click="$parent.similar(artists.name);$hide();" ng-class="active_class($index)">-->
+                            <!--<img ng-src="{{ artists.image[1]['#text'] }}" class="pull-left trend_img">-->
+                            <!--<br/>-->
+                            <!--<p class="pull-left trend_text" style="position: absolute;">{{ artists.name }}</p>-->
+                        <!--</a>-->
+                    <!--</li>-->
+                <!--</ul>-->
             </div>
             <div class="aside-footer">
                 <button type="button" class="btn btn-default" ng-click="$hide()">Close</button>
