@@ -26,6 +26,14 @@
                         <b><i class="fa fa-heart"></i> RECENT</b>
                     </a>
                 </li>
+                <li ng-if="artist">
+                    <a ng-click="scrollTo('similar')">
+                        <b><i class="fa fa-external-link-square"></i> Similar</b></a>
+                </li>
+                <li ng-if="artist">
+                    <a ng-click="scrollTo('albums')">
+                        <b><i class="fa fa-shopping-cart"></i> Albums</b></a>
+                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>

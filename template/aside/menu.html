@@ -21,6 +21,18 @@
                         <i class="fa fa-heart"></i> Recent Play List</a>
                     </b>
                 </h4>
+                <h4 ng-if="artist">
+                    <b>
+                        <a ng-click="$hide(scrollTo('similar'))">
+                            <i class="fa fa-external-link-square"></i> Similar</a>
+                    </b>
+                </h4>
+                <h4 ng-if="artist">
+                    <b>
+                        <a ng-click="$hide(scrollTo('albums'))">
+                            <i class="fa fa-shopping-cart"></i> Albums</a>
+                    </b>
+                </h4>
             </div>
             <div class="aside-footer">
                 <button type="button" class="btn btn-default" ng-click="$hide()">Close</button>

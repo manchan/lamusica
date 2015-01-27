@@ -5,7 +5,7 @@
  * The menu controller for the app. The menuCtrl:
  */
 lamusica.controller('menuCtrl', function(
-    $scope, $modal, $aside) {
+    $scope, $modal, $aside, $location, $anchorScroll) {
 
     // Show a How To Modal from a controller
     var modalHow = $modal({
@@ -57,4 +57,9 @@ lamusica.controller('menuCtrl', function(
             asideTrend.show();
         });
     };
+
+    $scope.scrollTo = function(id) {
+        $location.hash(id);
+        $anchorScroll();
+    }
 });
