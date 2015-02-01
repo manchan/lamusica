@@ -9,7 +9,7 @@ var left_disp = false;
  */
 lamusica.controller('mainCtrl', function(
     $rootScope, $scope, $controller, $location, Tracks, YouTube, PlayList, ArtistInfo,ChartTopArtists,
-    $http, $q) {
+    $http, $q, $window) {
 
     $scope.playing = false;
     $scope.title = 'lamusica';
@@ -44,16 +44,18 @@ lamusica.controller('mainCtrl', function(
             // index search
             index = _.indexOf(_.pluck(PlayList.list, 'name'), song);
         }
-        YouTube.play(PlayList.next(index), $scope.play, song);
+        var ddd = YouTube.play(PlayList.next(index), $scope.play, song);
         var track = PlayList.current_track();
         if(track) {
+
+            // params set
+            $location.search('song', track.name);
             $scope.title = "Lamusicaで " +
                 track.name + ' by ' + track.artist.name +
                 ' を聞いています♪ #lamusicafree';
-            // params set
-            $location.search('song', track.name);
+
             $("#tweetButtonWrapper").html(
-                '<a href="https://twitter.com/share" data-url="' + location.href + '" class="twitter-share-button"  data-text="'+ $scope.title + '" data-lang="en">Tweet</a>'
+                '<a href="https://twitter.com/share" data-url="' + $location.absUrl() + '" class="twitter-share-button"  data-text="'+ $scope.title + '" data-lang="en">Tweet</a>'
             );
             twttr.widgets.load();
             $scope.playing = true;
@@ -132,7 +134,7 @@ lamusica.controller('mainCtrl', function(
         // $broadcast $onの場合
 //        $rootScope.$broadcast('playsAdd');
     };
-    $scope.click = function(index){ $scope.play(index); };
+    $scope.click = function(index, song){ $scope.play(index, song); };
     $scope.active_class = function(index){
         if($scope.playing && PlayList.index == index) return 'list-active';
     };

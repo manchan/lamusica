@@ -4,7 +4,7 @@ var csso = require('gulp-csso');
 var rename = require('gulp-rename');
 
 gulp.task('default', function() {
-  return gulp.src('./css/app.less')
+  return gulp.src('./css/app.css')
   .pipe(less({
     paths: ['./']
   }))
@@ -15,5 +15,5 @@ gulp.task('default', function() {
 });
 
 gulp.task('watch', function() {
-  return gulp.watch('./*.less', ['default']);
+  return gulp.watch('./*.css', ['default']);
 });

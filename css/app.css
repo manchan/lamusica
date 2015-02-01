@@ -401,6 +401,10 @@ address {font-style:italic;}
 
 #social-buttons {
     margin:0 auto;
+    position:absolute;
+    right:35px;
+    top:15px;
+    float: right;
 }
 #footer{
     font-size:10px;
@@ -427,3 +431,4 @@ address {font-style:italic;}
 /*background: linear-gradient(to right, #e47d7d 0%, #c195d3 48%, #4fb4e8 100%);*/
 /*filter: progid:DXImageTransform.Microsoft.gradient(GradientType=1, StartColorStr='#e47d7d', EndColorStr='#4fb4e8'); }*/
 /*}*/
+

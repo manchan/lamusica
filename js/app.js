@@ -144,3 +144,12 @@ lamusica.service('PlayList', function(){
         this.ready = false;
     };
 });
+
+// resize header on scroll
+$(window).resize(function() {
+    if($(window).width() > 1000){
+        $('#social-buttons').css('top', '15px');
+    }else{
+        $('#social-buttons').css('top', '37px');
+    }
+});
