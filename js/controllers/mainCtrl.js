@@ -17,6 +17,9 @@ lamusica.controller('mainCtrl', function(
     // Artist予測表示
     $scope.getArtist= function(viewValue) {
 
+		if(!viewValue) {
+			return [];
+		}
         var params = {
             'artist': viewValue,
             'format': 'json',
@@ -27,6 +30,7 @@ lamusica.controller('mainCtrl', function(
             'http://ws.audioscrobbler.com/2.0/?api_key=6a6281367c3ad09f1b4a7c15dc50675b',
             { params: params }
         ).then(function(res) {
+				console.log(res);
                 if(typeof( res.data.results) != 'undefined' && res.data.results.artistmatches) {
                     var artists = res.data.results.artistmatches;
                     return artists.artist;

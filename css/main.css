@@ -1,0 +1,346 @@
+.thumbnail > img,
+.thumbnail a > img,
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
+	display: block;
+	max-width: 100%;
+	height: auto;
+}
+.btn-group-lg > .btn {
+	padding: 10px 16px;
+	font-size: 18px;
+	line-height: 1.3333333;
+	border-radius: 6px;
+}
+.btn-group-sm > .btn {
+	padding: 5px 10px;
+	font-size: 12px;
+	line-height: 1.5;
+	border-radius: 3px;
+}
+.btn-group-xs > .btn {
+	padding: 1px 5px;
+	font-size: 12px;
+	line-height: 1.5;
+	border-radius: 3px;
+}
+.dl-horizontal dd:before,
+.dl-horizontal dd:after,
+.container:before,
+.container:after,
+.container-fluid:before,
+.container-fluid:after,
+.row:before,
+.row:after,
+.form-horizontal .form-group:before,
+.form-horizontal .form-group:after,
+.btn-toolbar:before,
+.btn-toolbar:after,
+.btn-group-vertical > .btn-group:before,
+.btn-group-vertical > .btn-group:after,
+.nav:before,
+.nav:after,
+.navbar:before,
+.navbar:after,
+.navbar-header:before,
+.navbar-header:after,
+.navbar-collapse:before,
+.navbar-collapse:after,
+.pager:before,
+.pager:after,
+.panel-body:before,
+.panel-body:after,
+.modal-footer:before,
+.modal-footer:after {
+	content: " ";
+	display: table;
+}
+.dl-horizontal dd:after,
+.container:after,
+.container-fluid:after,
+.row:after,
+.form-horizontal .form-group:after,
+.btn-toolbar:after,
+.btn-group-vertical > .btn-group:after,
+.nav:after,
+.navbar:after,
+.navbar-header:after,
+.navbar-collapse:after,
+.pager:after,
+.panel-body:after,
+.modal-footer:after {
+	clear: both;
+}
+.modal.disabled {
+	animation: noop !important;
+}
+.modal.disabled.am-fade-and-slide-top .modal-dialog {
+	animation-duration: 0.3s;
+	animation-timing-function: ease-in-out;
+	animation-fill-mode: backwards;
+	animation-name: fadeAndSlideFromTop;
+}
+.modal.disabled.am-fade-and-slide-top.ng-enter .modal-dialog {
+	visibility: hidden;
+	animation-name: fadeAndSlideFromTop;
+}
+.modal.disabled.am-fade-and-slide-top.ng-enter-active .modal-dialog,
+.modal.disabled.am-fade-and-slide-top.ng-leave-active .modal-dialog {
+	visibility: visible;
+}
+.modal.disabled.am-fade-and-slide-top.ng-leave .modal-dialog {
+	animation-name: fadeAndSlideToTop;
+}
+.modal.disabled.am-fade-and-scale .modal-dialog {
+	animation-duration: 0.3s;
+	animation-timing-function: ease-in-out;
+	animation-fill-mode: backwards;
+	animation-name: fadeAndScaleIn;
+}
+.modal.disabled.am-fade-and-scale.ng-enter .modal-dialog {
+	visibility: hidden;
+	animation-name: fadeAndScaleIn;
+}
+.modal.disabled.am-fade-and-scale.ng-enter-active .modal-dialog,
+.modal.disabled.am-fade-and-scale.ng-leave-active .modal-dialog {
+	visibility: visible;
+}
+.modal.disabled.am-fade-and-scale.ng-leave .modal-dialog {
+	animation-name: fadeAndScaleOut;
+}
+@keyframes noop {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 1;
+	}
+}
+input.ng-dirty.ng-invalid,
+textarea.ng-dirty.ng-invalid,
+select.ng-dirty.ng-invalid {
+	color: #b94a48;
+	border-color: #ee5f5b;
+}
+input.ng-dirty.ng-invalid:focus,
+textarea.ng-dirty.ng-invalid:focus,
+select.ng-dirty.ng-invalid:focus {
+	border-color: #e9322d;
+	-webkit-box-shadow: 0 0 6px #f8b9b7;
+	box-shadow: 0 0 6px #f8b9b7;
+}
+input:focus.ng-pristine.ng-invalid,
+textarea:focus.ng-pristine.ng-invalid,
+select:focus.ng-pristine.ng-invalid {
+	color: #555555;
+	border: 1px solid #cccccc;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+	-webkit-transition: border linear .2s, box-shadow linear .2s;
+	-o-transition: border linear .2s, box-shadow linear .2s;
+	transition: border linear .2s, box-shadow linear .2s;
+}
+input:focus.ng-pristine.ng-invalid:focus,
+textarea:focus.ng-pristine.ng-invalid:focus,
+select:focus.ng-pristine.ng-invalid:focus {
+	border-color: rgba(82, 168, 236, 0.8);
+	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);
+	box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);
+}
+[tabindex="-1"] {
+	outline: none;
+}
+a[ng-click] {
+	cursor: pointer;
+}
+body .modal {
+	overflow-y: hidden;
+}
+body.modal-open {
+	overflow-y: visible !important;
+}
+.lt-ie9 .bs-sidebar {
+	display: none !important;
+}
+.btn[bs-select] {
+	outline: none;
+}
+.modal-backdrop {
+	z-index: 1040;
+	bottom: 0px;
+}
+.datepicker.dropdown-menu {
+	width: 250px;
+	height: 270px;
+}
+.datepicker.dropdown-menu button {
+	outline: none;
+	border: 0px;
+}
+.datepicker.dropdown-menu tbody {
+	height: 180px;
+}
+.datepicker.dropdown-menu tbody button {
+	padding: 6px;
+}
+.datepicker.dropdown-menu.datepicker-mode-1 tbody button,
+.datepicker.dropdown-menu.datepicker-mode-2 tbody button {
+	height: 65px;
+}
+.timepicker.dropdown-menu {
+	padding: 0 4px;
+}
+.timepicker.dropdown-menu button {
+	outline: none;
+	border: 0px;
+}
+.timepicker.dropdown-menu tbody button {
+	padding: 6px;
+}
+.select.dropdown-menu.select-multiple li {
+	position: relative;
+}
+.select.dropdown-menu.select-multiple li > i {
+	color: white;
+	display: none;
+	position: absolute;
+	top: 5px;
+	right: 10px;
+}
+.select.dropdown-menu.select-multiple li.active > i {
+	display: block;
+}
+body {
+	position: relative;
+	/* For scrollyspy */
+	padding-top: 50px;
+	/* Account for fixed navbar */
+}
+/* Tweak display of the code snippets when following an example */
+.bs-example-scope {
+	font-size: 85%;
+}
+.bs-example-scope + .bs-example {
+	margin: -15px -15px 15px;
+}
+.bs-example-scope + .bs-example + .highlight > pre {
+	border-radius: 0 0 4px 4px;
+}
+.aside.bs-docs-aside .aside-header {
+	background: #b94846;
+}
+.aside.bs-docs-aside .nav {
+	margin: 0px;
+}
+.bs-docs-social {
+	max-height: 200px;
+}
+.bs-docs-social ul {
+	list-style: none;
+	padding: 1em 0 0 0;
+}
+.bs-docs-social ul li {
+	height: 30px;
+}
+@media (max-width: 991px) {
+	.bs-docs-social ul li {
+		display: inline-block;
+	}
+}
+/*
+ * Topography, yo!
+ *
+ * Apply the map background via base64 and relevant colors where we need 'em.
+ */
+.bs-docs-home,
+.bs-header {
+	color: white;
+	background: #b94846 url("../images/triangular-red.png");
+	padding-bottom: 20px;
+}
+/* Echo out a label for the example */
+pre > code {
+	background: transparent;
+}
+.bs-example + .highlight {
+	position: relative;
+}
+.bs-example + .highlight code {
+	padding: 2.5em 0.5em 1em;
+}
+.bs-example + .highlight:after {
+	content: "Source";
+	position: absolute;
+	top: 15px;
+	left: 15px;
+	font-size: 12px;
+	font-weight: bold;
+	color: #bbb;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+}
+.edit-plunkr,
+a[ng-click] {
+	cursor: pointer;
+}
+input[type="checkbox"] {
+	cursor: pointer;
+}
+.twitter-follow-button {
+	position: relative;
+	top: 5px;
+	margin-left: 10px;
+}
+.tab-pane.am-fade {
+	animation-duration: .3s;
+	animation-timing-function: ease;
+	animation-fill-mode: backwards;
+	opacity: 1;
+}
+.tab-pane.am-fade.active-remove {
+	display: none !important;
+}
+.tab-pane.am-fade.active-add {
+	animation-name: fadeIn;
+}
+.panel-collapse.am-collapse {
+	animation-duration: .3s;
+	animation-timing-function: ease;
+	animation-fill-mode: backwards;
+	overflow: hidden;
+}
+.panel-collapse.am-collapse.in-remove {
+	animation-name: collapse;
+	display: block;
+}
+.panel-collapse.am-collapse.in-add {
+	animation-name: expand;
+}
+.panel-collapse.am-collapse2 {
+	transition: 0.3s ease max-height;
+	max-height: 100px;
+	overflow: hidden;
+}
+.panel-collapse.am-collapse2.in-remove {
+	max-height: 100px;
+	display: block;
+}
+.panel-collapse.am-collapse2.in-add {
+	max-height: 0px;
+}
+@keyframes expand {
+	from {
+		max-height: 0px;
+	}
+	to {
+		max-height: 100px;
+	}
+}
+@keyframes collapse {
+	from {
+		max-height: 100px;
+	}
+	to {
+		max-height: 0px;
+	}
+}
