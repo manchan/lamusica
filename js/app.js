@@ -73,11 +73,10 @@ lamusica.service('YouTube', function($window, $http, ENV_URL){
             var query = track.name + ' ' + track.artist.name;
         }
 
-		var key = _.map(ENV_URL, function(v){
+		var key = _.filter(ENV_URL, function(v){
 //			var str_url = url.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
 			var reg = new RegExp('(' + v.url +'.*?)');
 			var matches = location.href.match(reg);
-			console.log(matches);
 			if(matches){
 				return v.api_key;
 			}
@@ -87,7 +86,7 @@ lamusica.service('YouTube', function($window, $http, ENV_URL){
         $http.jsonp('https://www.googleapis.com/youtube/v3/search', {
 //			&fields=items(id,snippet(channelTitle,title,thumbnails),statistics)&part=snippet,contentDetails,statistics
             params : {
-				key: key,
+				key: key[0].api_key,
 				part: 'id,snippet',
                 q: query + ' -みた -コピ -カラオケ -ピアノ -弾き語り -カバー -ヒトカラ',
 				order: 'viewCount',
