@@ -15,11 +15,11 @@ lamusica.value('ENV_URL',
 	[
 		{
 			'api_key':'AIzaSyBi7rXyIQLEmBL8dypJ2SEm-MMtNydVJUk',
-			'url': 'http://localhost'
+			'url': 'localhost'
 		},
 		{
 			'api_key':'AIzaSyAsD4O3_C9b-k_Zie0VadjoRWnhl0O7tiA',
-			'url': 'http://manchan.github.io/lamusica/'
+			'url': 'manchan.github.io'
 		}
 	]);
 
@@ -73,9 +73,9 @@ lamusica.service('YouTube', function($window, $http, ENV_URL){
             var query = track.name + ' ' + track.artist.name;
         }
 
-		var matches = location.href.match(/(http:\/\/localhost.*?)/);
 		var key = _.map(ENV_URL, function(v){
-			if(matches[0] == v.url){
+			var matches = location.href.match('/(' + v.url + '.*?)/');
+			if(matches){
 				return v.api_key;
 			}
 		});
