@@ -15,11 +15,11 @@ lamusica.value('ENV_URL',
 	[
 		{
 			'api_key':'AIzaSyBi7rXyIQLEmBL8dypJ2SEm-MMtNydVJUk',
-			'url': 'localhost'
+			'url': "http:\/\/localhost"
 		},
 		{
 			'api_key':'AIzaSyAsD4O3_C9b-k_Zie0VadjoRWnhl0O7tiA',
-			'url': 'manchan.github.io'
+			'url': "http:\/\/manchan\.github\.io"
 		}
 	]);
 
@@ -74,7 +74,10 @@ lamusica.service('YouTube', function($window, $http, ENV_URL){
         }
 
 		var key = _.map(ENV_URL, function(v){
-			var matches = location.href.match('/(' + v.url + '.*?)/');
+//			var str_url = url.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+			var reg = new RegExp('(' + v.url +'.*?)');
+			var matches = location.href.match(reg);
+			console.log(matches);
 			if(matches){
 				return v.api_key;
 			}
@@ -93,6 +96,8 @@ lamusica.service('YouTube', function($window, $http, ENV_URL){
                 callback : 'JSON_CALLBACK'
             }
         }).success(function(data){
+
+				console.log(data);
 
                 if(data.items[0]) {
 //					data.items.sort(function(a,b){
