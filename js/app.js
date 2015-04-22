@@ -11,7 +11,8 @@
 var lamusica = angular.module('lamusica',
     ['ng', 'ngAnimate', 'mgcrea.ngStrap', 'ngRoute', 'firebase', 'react']);
 
-lamusica.value('ENV_URL',
+
+lamusica.value('YT_ENV_VALUES',
 	[
 		{
 			'api_key':'AIzaSyBi7rXyIQLEmBL8dypJ2SEm-MMtNydVJUk',
@@ -29,6 +30,7 @@ lamusica.run(function(){
     var first_tag = document.getElementsByTagName('script')[0];
     first_tag.parentNode.insertBefore(tag, first_tag);
 });
+
 
 /**
  * Modal default setting
@@ -62,7 +64,7 @@ lamusica.config(function($asideProvider) {
 /**
  * YouTube Player generator
  */
-lamusica.service('YouTube', function($window, $http, ENV_URL){
+lamusica.service('YouTube', function($window, $http, genericServices){
     this.ready = false;
     this.player = null;
     this.play = function(track, callback, song) {
@@ -73,20 +75,9 @@ lamusica.service('YouTube', function($window, $http, ENV_URL){
             var query = track.name + ' ' + track.artist.name;
         }
 
-		var key = _.filter(ENV_URL, function(v){
-//			var str_url = url.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
-			var reg = new RegExp('(' + v.url +'.*?)');
-			var matches = location.href.match(reg);
-			if(matches){
-				return v.api_key;
-			}
-		});
-
-//		https://www.googleapis.com/youtube/v3/videos?id=PqJNc9KVIZE&key=AIzaSyDUrhoHVRCb_dzCS50GgnqRhVGOTadMmLo&fields=items(id,snippet(channelTitle,title,thumbnails),statistics)&part=snippet,contentDetails,statistics
         $http.jsonp('https://www.googleapis.com/youtube/v3/search', {
-//			&fields=items(id,snippet(channelTitle,title,thumbnails),statistics)&part=snippet,contentDetails,statistics
             params : {
-				key: key[0].api_key,
+				key: genericServices.getYtKey(),
 				part: 'id,snippet',
                 q: query + ' -みた -コピ -カラオケ -ピアノ -弾き語り -カバー -ヒトカラ',
 				order: 'viewCount',
@@ -96,21 +87,13 @@ lamusica.service('YouTube', function($window, $http, ENV_URL){
             }
         }).success(function(data){
 
-				console.log(data);
-
                 if(data.items[0]) {
-//					data.items.sort(function(a,b){
-//                        return b['favoriteCount'] - a['favoriteCount'];
-//                    });
                     var id = data.items[0]['id']['videoId'];
-//                    var id = permalink.match(/^.+\/(.+?)$/)[1];
                     if(this.ready) {
                         this.player.clearVideo();
                         this.player.loadVideoById(id);
                     }else{
                         this.player = new YT.Player('player', {
-//                            height: '400',
-//                            width: '600',
                             videoId : id,
                             playerVars: { 'autoplay': 1, 'rel': 0 },
                             events : {

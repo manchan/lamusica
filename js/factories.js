@@ -137,3 +137,25 @@ lamusica.factory('Aside', function($scope, $aside) {
         }
     };
 });
+
+/**
+ * Generic Services
+ */
+lamusica.factory("genericServices", function(YT_ENV_VALUES) {
+
+	var getYtKey = function(){
+		var key = _.filter(YT_ENV_VALUES, function(v){
+//			var str_url = url.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+			var reg = new RegExp('(' + v.url +'.*?)');
+			var matches = location.href.match(reg);
+			if(matches){
+				return v.api_key;
+			}
+		});
+		return key[0].api_key;
+	};
+
+	return {
+		getYtKey: getYtKey
+	}
+});
