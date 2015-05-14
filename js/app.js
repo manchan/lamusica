@@ -78,16 +78,18 @@ lamusica.service('YouTube', function($window, $http, genericServices){
         $http.jsonp('https://www.googleapis.com/youtube/v3/search', {
             params : {
 				key: genericServices.getYtKey(),
-				part: 'id,snippet',
-                q: query + ' -みた -コピ -カラオケ -ピアノ -弾き語り -カバー -ヒトカラ',
-				order: 'viewCount',
-                'max-results' : 2,
+				part: 'id',
+                q: query + '',
+//				-みた -コピ -カラオケ -ピアノ -弾き語り -カバー -ヒトカラ
+//				order: 'viewCount',
+//                'max-results' : 1,
                 format : 5,
                 callback : 'JSON_CALLBACK'
             }
         }).success(function(data){
 
                 if(data.items[0]) {
+
                     var id = data.items[0]['id']['videoId'];
                     if(this.ready) {
                         this.player.clearVideo();
