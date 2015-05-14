@@ -6,13 +6,16 @@ http://manchan.github.io/lamusica/
 
 ### Lamusica using 
 * Last.fm Web API
-* YouTube API
+* YouTube Data API
 * Amazon Product Advertising API
-* jQuery
 * AngularJS
 * AngularStrap
-* Twitter Bootstrap
 * Firebase
+* React
+* jQuery
+* Twitter Bootstrap
+
+
 
 
 Having fun!
