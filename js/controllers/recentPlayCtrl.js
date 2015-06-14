@@ -14,7 +14,7 @@ lamusica.controller('recentPlayCtrl', function(
     var url = 'https://luminous-heat-9275.firebaseio.com/lamusica/plays/';
     var fireRef = new Firebase(url);
     // 最新100件
-    var sync = $firebase(fireRef.orderByChild("date").limitToLast(100));
+    var sync = $firebase(fireRef.orderByChild("date"));
     $scope.plays = sync.$asArray();
     $scope.fire_reload = function(){
 
@@ -58,7 +58,7 @@ lamusica.controller('recentPlayCtrl', function(
             var exists = false;
             angular.forEach($scope.plays, function(play, i){
 
-                if($scope.artist == play.name) {
+                if($scope.artist == play.name && !exists) {
                     var row = $scope.plays.$getRecord($scope.plays[i].$id);
                     $scope.plays[i].count++;
                     $scope.plays[i].date = new Date().getTime();
