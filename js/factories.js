@@ -5,22 +5,29 @@ lamusica.factory('Tracks', function($http) {
     return {
         get : function(query, callback) {
             var num = angular.element('#number').val();
-            $http.jsonp('http://ws.audioscrobbler.com/2.0/', {
-                params : {
-                    api_key : '6a6281367c3ad09f1b4a7c15dc50675b',
-                    method : 'artist.getTopTracks',
-                    limit : (num) ? num : 20,
-                    format : 'json',
-                    callback : 'JSON_CALLBACK',
-                    artist : query
-                }
-            }).success(function(data){
-                    if(data.toptracks) {
-                        callback(data.toptracks.track);
-                    }
-                    return [];
-                });
-            return [];
+			var limi = (num) ? num : '20';
+			var requesturl = 'http://ws.audioscrobbler.com/2.0/?api_key=6a6281367c3ad09f1b4a7c15dc50675b&' +
+				'method=artist.getTopTracks&' +
+				'limit=' + limi +
+				'callback=JSON_CALLBACK&' +
+				'artist=' + query + '&' +
+				'format=json';
+			$http.get(encodeURI(requesturl)).then(function(data){
+				if(data.data.toptracks) {
+					callback(data.data.toptracks.track);
+				}
+				return [];
+			});
+			return [];
+
+//            $http.jsonp(encodeURI(requesturl)).success(function(data){
+//					console.dir(data);
+//                    if(data.toptracks) {
+//                        callback(data.toptracks.track);
+//                    }
+//                    return [];
+//                });
+//            return [];
         }
     };
 });
@@ -32,21 +39,17 @@ lamusica.factory('ArtistInfo', function($http) {
 
     return {
         get : function(query, callback) {
-            $http.jsonp('http://ws.audioscrobbler.com/2.0/', {
-                params : {
-                    api_key : '6a6281367c3ad09f1b4a7c15dc50675b',
-                    method : 'artist.getinfo',
-                    format : 'json',
-                    callback : 'JSON_CALLBACK',
-                    artist : query
-                }
-            }).success(function(data){
-
-                    if(data.artist) {
-                        callback(data.artist);
-                    }
-                    return [];
-                });
+			var requesturl = 'http://ws.audioscrobbler.com/2.0/?api_key=6a6281367c3ad09f1b4a7c15dc50675b&' +
+				'method=artist.getinfo&' +
+				'callback=JSON_CALLBACK&' +
+				'artist=' + query + '&' +
+				'format=json';
+			$http.get(encodeURI(requesturl)).then(function(data){
+				if(data.data.artist) {
+					callback(data.data.artist);
+				}
+				return [];
+			});
         }
     };
 });
