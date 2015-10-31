@@ -10,25 +10,32 @@
     font-family: 'Alegreya Sans', sans-serif;
 }
 body {
-    background-color: #000000;
     font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
     /*padding-top: 0px;*/
+	background-color: #edac7d;
+background: -webkit-linear-gradient(top, #31b7d7 0%, #edac7d 100%);
+background: -moz-linear-gradient(top, #31b7d7 0%, #edac7d 100%);
+background: -ms-linear-gradient(top, #31b7d7 0%, #edac7d 100%);
+background: -o-linear-gradient(top, #31b7d7 0%, #edac7d 100%);
+background: linear-gradient(to bottom, #31b7d7 0%, #edac7d 100%);
+filter: progid:DXImageTransform.Microsoft.gradient(GradientType=1, StartColorStr='#31b7d7', EndColorStr='#edac7d');  
 }
+
 img {border: 0;}
 ol, ul {
     list-style: none;
 }
-p {color: white;}
+p {color: #000;}
 h1 {
     font-weight:bold;
     margin-right: 90px;
 }
-h3 {color: #EB6100;}
+h3 {color: #000;}
 a {
-    color: #EB6100;
+    color: #000;
     cursor: pointer;
 }
-a:hover{color: #EB8D00;}
+a:hover{color: #eec362;}
 .container {
     float: left;
     width:100%;
@@ -37,6 +44,25 @@ a:hover{color: #EB8D00;}
 .clearLeft {
     clear: left;
 }
+
+/****************************************
+
+          font
+
+*****************************************/
+
+@font-face {
+	font-family: 'lamusica';
+	src:url('../fonts/LetterGothicStd-Slanted.woff') format('woff'), /* Modern Browsers */
+	url('../fonts/LetterGothicStd-Slanted.TTF') format('truetype'); /* Safari, Android, iOS */
+}
+
+@font-face {
+	font-family: 'lamusica2';
+	src:url('../fonts/segoepr.woff') format('woff'), /* Modern Browsers */
+	url('../fonts/segoepr.ttf') format('truetype'); /* Safari, Android, iOS */
+}
+
 
 /****************************************
 
@@ -54,13 +80,27 @@ a:hover{color: #EB8D00;}
     /*margin-right: 20px;*/
 }
 #header {
-    text-align:center;
-    margin-top: 40px;
-    font-size:12px;
+	text-align:center;
+	margin-top: 40px;
 }
 #header h1{
     text-align:center;
-    margin-bottom:50px;
+	font-family:'lamusica2';
+	font-size:91px;
+	font-weight:100;
+	margin-top:85px;
+	margin-bottom:19px;
+	text-shadow: -2px 2px 4px #000;
+}
+
+#header .beginning{
+	font-family:'lamusica';
+	letter-spacing: 0.1em;
+	text-align:right;
+	font-size:18px;
+	border-top-width: 6px;
+	border-top-style: solid;
+	border-top-color: #EEC362;
 }
 
 #header .explain{
@@ -73,8 +113,6 @@ a:hover{color: #EB8D00;}
     color:#EB6100;
 }
 .bs-docs-nav {
-    border: none;
-    background-color:#000000;
 }
 .bs-docs-nav .navbar-toggle {
     border: none;
@@ -83,6 +121,10 @@ a:hover{color: #EB8D00;}
 .navbar-toggle:hover {
     background-color: #ffffff;
 }
+
+.yellowline{
+}
+
 
 /****************************************
 
@@ -116,26 +158,28 @@ a:hover{color: #EB8D00;}
 .modal {
     font-size:14px;
     padding-bottom:10px;
-    color:#EB6100;
 }
 .modal-dialog {
     text-align: left;
 }
 .modal-content, .aside-content {
-    background-color: #282828;
+    background-color: #edac7d;
+background: -webkit-linear-gradient(top, #31b7d7 0%, #edac7d 100%);
+background: -moz-linear-gradient(top, #31b7d7 0%, #edac7d 100%);
+background: -ms-linear-gradient(top, #31b7d7 0%, #edac7d 100%);
+background: -o-linear-gradient(top, #31b7d7 0%, #edac7d 100%);
+background: linear-gradient(to bottom, #31b7d7 0%, #edac7d 100%);
+filter: progid:DXImageTransform.Microsoft.gradient(GradientType=1, StartColorStr='#31b7d7', EndColorStr='#edac7d');
 }
 .modal-body
  p {
-    color: #ffffff;
+    color: #333;
 }
 .modal-header {
-    background-color: #282828;
 }
 .modal-body {
-    background-color: #000000;
 }
 .modal-footer, .aside-footer {
-    background-color: #282828;
 }
 
 /****************************************
@@ -145,16 +189,14 @@ a:hover{color: #EB8D00;}
 *****************************************/
 
 .aside .aside-dialog .aside-header{
-    background-color: #282828;
+	 background-color: #31b7d7;
 }
 .aside-body{
-    background-color: #000000;
 }
 .aside-title, .aside-body h4,span {
     color: #EB6100;
 }
 .aside{
-    background-color: #282828;
 }
 select {
     margin: 15px 0px 15px 0px;
@@ -253,7 +295,6 @@ iframe { width: 100%; margin: 0 auto}
     height:400px;
     min-width: 125px;
     min-height: 100px;
-    background-color:#000;
 }
 
 /****************************************
@@ -267,7 +308,7 @@ li.similar_link{
     float: left;
     margin-bottom:10px;
     width: 50%;
-    height: 90px;
+    height: 90px
 }
 
 /****************************************
@@ -408,7 +449,7 @@ address {font-style:italic;}
 }
 #footer{
     font-size:10px;
-    margin-top:80px;
+    margin-top:110px;
 }
 #footer p{
     text-align:center;

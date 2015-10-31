@@ -1,38 +1,30 @@
 <header class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="banner" ng-controller="menuCtrl">
     <div class="container">
-        <div class="navbar-header">
-            <button class="navbar-toggle" type="button" data-template="template/aside/menu.html" data-animation="am-fade-and-slide-left" data-placement="left" title="Menu" data-container="body" bs-aside>
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a href="index.html" class="navbar-brand">LAMUSICA</a>
-        </div>
+		<div class="yellowline">
         <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
             <ul class="nav navbar-nav">
                 <li>
                     <a ng-click="modalHow()">
-                        <b><i class="fa fa-cogs"></i> HOW</b>
+                        <b>How</b>
                     </a>
                 </li>
                 <li>
                     <a ng-click="asideTrend()">
-                        <b><i class="fa fa-headphones"></i> TREND</b>
+                        <b>Trend</b>
                     </a>
                 </li>
                 <li>
                     <a ng-click="recentPlay()">
-                        <b><i class="fa fa-heart"></i> RECENT</b>
+                        <b>Recent</b>
                     </a>
                 </li>
                 <li ng-if="artist">
                     <a ng-click="scrollTo('similar')">
-                        <b><i class="fa fa-external-link-square"></i> Similar</b></a>
+                        <b>Similar</b></a>
                 </li>
                 <li ng-if="artist">
                     <a ng-click="scrollTo('albums')">
-                        <b><i class="fa fa-shopping-cart"></i> Albums</b></a>
+                        <b>Albums</b></a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -40,18 +32,7 @@
                 </li>
             </ul>
         </nav>
-    </div>
-    <div id="social-buttons">
-            <span>
-              <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fmanchan.github.io%2Flamusica%2F&amp;width&amp;layout=button_count&amp;action=like&amp;show_faces=true&amp;share=true&amp;height=21" scrolling="no" frameborder="0" style="border:none; height:21px;width:175px;"  allowTransparency="true"></iframe>
-            </span>
-            <span id="tweetButtonWrapper">
-                <a href="https://twitter.com/share" data-url="javascript:location.href" class="twitter-share-button"  data-text="Lamusica. Music Player. http://manchan.github.io/lamusica" data-lang="en">Tweet</a>
-            </span>
-            <span>
-                <a href="http://b.hatena.ne.jp/entry/http://manchan.github.io/lamusica/" class="hatena-bookmark-button" data-hatena-bookmark-title="lamusica" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="en" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="15" height="15" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
-            </span>
-        <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+	</div>
     </div>
 
 </header>
